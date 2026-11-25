@@ -1,0 +1,13 @@
+{
+  "name": "smart-system-for-rfa",
+  "version": "1.0.0",
+  "description": "Smart System & Link Tracker for RFA with Coordinator Accounts and Real-time Tracking",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

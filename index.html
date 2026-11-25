@@ -1,0 +1,1669 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Smart System for RFA | Link Tracker</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <style>
+    :root {
+      --bg: #f4f6fa;
+      --surface: #ffffff;
+      --surface2: #f8fafc;
+      --line: #e2e8f0;
+      --line2: #edf2f7;
+      --fg: #0f172a;
+      --muted: #64748b;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-fg: #ffffff;
+      --accent-soft: #eff6ff;
+      --ok: #16a34a;
+      --ok-bg: #dcfce7;
+      --ok-bar: #22c55e;
+      --warn: #d97706;
+      --warn-bg: #fef3c7;
+      --warn-bar: #f59e0b;
+      --new: #64748b;
+      --new-bg: #f1f5f9;
+      --new-bar: #cbd5e1;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --font: "Cairo", "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+      --mono: "IBM Plex Mono", Consolas, monospace;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0b1120;
+      --surface: #131d31;
+      --surface2: #1e293b;
+      --line: #334155;
+      --line2: #1e293b;
+      --fg: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --accent-fg: #ffffff;
+      --accent-soft: #1e3a8a;
+      --ok: #4ade80;
+      --ok-bg: #064e3b;
+      --ok-bar: #22c55e;
+      --warn: #fbbf24;
+      --warn-bg: #451a03;
+      --warn-bar: #f59e0b;
+      --new: #94a3b8;
+      --new-bg: #1e293b;
+      --new-bar: #475569;
+      --danger: #f87171;
+      --danger-bg: #450a0a;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 24px 16px 60px;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1250px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    button, input, textarea, select {
+      font-family: inherit;
+      color: inherit;
+    }
+    button { cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* Header */
+    header {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    }
+    .kicker {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 2px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .user-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .user-badge .role-tag {
+      font-size: 0.75rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-weight: 600;
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+    .btn.primary {
+      background: var(--accent);
+      color: var(--accent-fg);
+      border-color: var(--accent);
+      box-shadow: 0 2px 6px rgba(37,99,235,0.25);
+    }
+    .btn.primary:hover {
+      background: var(--accent-hover);
+      color: var(--accent-fg);
+    }
+    .btn.danger {
+      color: var(--danger);
+      border-color: var(--danger-bg);
+      background: var(--danger-bg);
+    }
+    .btn.danger:hover {
+      background: var(--danger);
+      color: #fff;
+    }
+    .btn.small {
+      padding: 4px 12px;
+      min-height: 32px;
+      font-size: 0.85rem;
+    }
+
+    /* Summary Card */
+    .summary {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      overflow: hidden;
+    }
+    .sum-l {
+      padding: 22px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      border-left: 1px solid var(--line2);
+    }
+    .pct {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .pct b {
+      font-size: 3rem;
+      line-height: 1;
+      font-weight: 800;
+      font-family: var(--mono);
+      color: var(--fg);
+    }
+    .pct span {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .bar {
+      height: 14px;
+      border-radius: 99px;
+      background: var(--new-bg);
+      overflow: hidden;
+      display: flex;
+    }
+    .bar i { display: block; height: 100%; transition: width 0.3s ease; }
+    .bar .d { background: var(--ok-bar); }
+    .bar .o { background: var(--warn-bar); }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .legend span { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+    .legend b { color: var(--fg); font-weight: 700; font-family: var(--mono); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .dot.d { background: var(--ok-bar); }
+    .dot.o { background: var(--warn-bar); }
+    .dot.n { background: var(--new-bar); }
+
+    .sum-r {
+      padding: 22px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cchip {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 99px;
+      padding: 4px 14px 4px 6px;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      min-height: 38px;
+      transition: all 0.15s ease;
+    }
+    .cchip.all { padding-right: 14px; padding-left: 14px; }
+    .cchip:hover { border-color: var(--accent); }
+    .cchip small {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      background: var(--surface2);
+      padding: 1px 6px;
+      border-radius: 99px;
+    }
+    .cchip[aria-pressed="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-fg);
+    }
+    .cchip[aria-pressed="true"] small {
+      background: rgba(255, 255, 255, 0.25);
+      color: inherit;
+    }
+    .av {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #fff;
+      flex: none;
+    }
+    .av.none { background: var(--new-bar); color: var(--fg); }
+
+    /* Coordinator Quick Banner */
+    .coord-banner {
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #fff;
+      border-radius: 16px;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.25);
+    }
+    .coord-banner h3 { margin: 0; font-size: 1.15rem; font-weight: 700; }
+    .coord-banner p { margin: 2px 0 0; opacity: 0.88; font-size: 0.9rem; }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .search {
+      position: relative;
+      flex: 1 1 260px;
+      min-width: 0;
+    }
+    .search svg {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    .search input {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 10px 42px 10px 14px;
+      min-height: 42px;
+    }
+    select {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 10px;
+      padding: 9px 12px;
+      min-height: 42px;
+      font-weight: 600;
+    }
+    .seg {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .seg button {
+      border: 0;
+      background: none;
+      padding: 8px 14px;
+      min-height: 40px;
+      border-left: 1px solid var(--line);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .seg button:first-child { border-left: 0; }
+    .seg button:hover:not(:disabled) { background: var(--surface2); }
+    .seg button[aria-pressed="true"] {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .count-bar {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Links Table */
+    .table {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .cols {
+      display: grid;
+      grid-template-columns: 32px 50px minmax(0, 2.5fr) 140px minmax(0, 1.4fr) 160px;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 20px;
+    }
+    .thead {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--line);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .row {
+      border-bottom: 1px solid var(--line2);
+      border-right: 5px solid var(--stripe, var(--new-bar));
+      transition: background 0.15s ease;
+    }
+    .row:last-child { border-bottom: 0; }
+    .row.st-done { --stripe: var(--ok-bar); }
+    .row.st-open { --stripe: var(--warn-bar); }
+    .row.open { background: var(--surface2); }
+    .sum { cursor: pointer; }
+    .sum:hover { background: var(--surface2); }
+    .chk input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .num {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .sites {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+    .site {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      min-width: 0;
+      flex-wrap: wrap;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: var(--new-bg);
+      color: var(--fg);
+      border-radius: 5px;
+      padding: 1px 6px;
+    }
+    .nm { font-weight: 700; overflow-wrap: anywhere; }
+    .cd { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+    .meta { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+    .chip {
+      font-size: 0.76rem;
+      border-radius: 6px;
+      padding: 2px 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-weight: 700;
+    }
+    .chip.ghost { background: var(--new-bg); color: var(--muted); }
+    .who { min-width: 0; display: flex; gap: 10px; align-items: flex-start; }
+    .who b { font-weight: 700; }
+    .who .sm { font-size: 0.82rem; color: var(--muted); }
+    .who .none { color: var(--muted); font-style: italic; }
+    .state { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+    .pill {
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 99px;
+      padding: 3px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pill i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .pill.new { background: var(--new-bg); color: var(--new); }
+    .pill.open { background: var(--warn-bg); color: var(--warn); }
+    .pill.done { background: var(--ok-bg); color: var(--ok); }
+    .state .sm {
+      font-size: 0.82rem;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Expanded Editor */
+    .editor {
+      border-top: 1px solid var(--line2);
+      padding: 22px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+      background: var(--surface2);
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .panel h3 {
+      margin: 0;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line2);
+      padding-bottom: 8px;
+    }
+    .f {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .f label, .f .lb {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--fg);
+    }
+    .f input, .f textarea {
+      border: 1px solid var(--line);
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 9px 12px;
+      min-height: 40px;
+      width: 100%;
+    }
+    .f textarea { min-height: 90px; resize: vertical; }
+    .hint { font-size: 0.8rem; color: var(--muted); }
+    .stamp {
+      grid-column: 1 / -1;
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-family: var(--mono);
+      text-align: left;
+    }
+
+    /* Bulk actions bar */
+    .bulk {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      background: var(--surface);
+      border-top: 3px solid var(--accent);
+      padding: 14px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 -8px 24px rgba(0,0,0,0.12);
+    }
+
+    /* Modals & Dialogs */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+    }
+    .dialog {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow-lg);
+      padding: 26px;
+      max-width: 500px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+    .dialog h2 { margin: 0; font-size: 1.35rem; font-weight: 800; }
+    .dialog p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .dgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .dgrid .wide { grid-column: 1 / -1; }
+    .drow { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+    .err { color: var(--danger); font-weight: 700; font-size: 0.88rem; margin: 0; }
+
+    /* Login Screen Specifics */
+    .login-container {
+      max-width: 460px;
+      margin: 40px auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 36px 30px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .login-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .login-icon {
+      width: 54px;
+      height: 54px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      margin-bottom: 4px;
+      box-shadow: 0 6px 16px rgba(37,99,235,0.35);
+    }
+    .user-select-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .user-card-btn {
+      border: 2px solid var(--line);
+      background: var(--surface2);
+      border-radius: 12px;
+      padding: 12px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      transition: all 0.15s ease;
+    }
+    .user-card-btn:hover { border-color: var(--accent); }
+    .user-card-btn[aria-pressed="true"] {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .user-card-btn .badge-pill {
+      font-size: 0.72rem;
+      background: var(--line);
+      padding: 1px 8px;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 4px); }
+
+    .empty { padding: 48px 20px; text-align: center; color: var(--muted); }
+    .empty b { display: block; color: var(--fg); font-size: 1.1rem; margin-bottom: 6px; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .summary { grid-template-columns: 1fr; }
+      .sum-l { border-left: 0; border-bottom: 1px solid var(--line2); }
+      .thead { display: none; }
+      .cols { grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; }
+      .meta, .who, .state { grid-column: 2 / -1; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap" id="app">
+
+  <!-- LOGIN SCREEN (Shown if not logged in) -->
+  <div id="loginView" class="login-container" style="display:none;">
+    <div class="login-header">
+      <div class="login-icon">⚡</div>
+      <h2 style="margin:0; font-weight:800;">تسجيل الدخول للمنظومة</h2>
+      <p style="margin:0; color:var(--muted); font-size:0.95rem;">اختر حسابك وأدخل رقم الـ PIN للمتابعة</p>
+    </div>
+
+    <div>
+      <label style="display:block; font-weight:700; margin-bottom:8px;">اختر الكوردينيتور / الحساب:</label>
+      <div class="user-select-grid" id="userSelectList">
+        <!-- populated dynamically -->
+      </div>
+    </div>
+
+    <div class="f">
+      <label for="loginPin">رقم الـ PIN السري:</label>
+      <input type="password" id="loginPin" inputmode="numeric" placeholder="أدخل رقم الـ PIN" maxlength="6" style="text-align:center; font-size:1.3rem; letter-spacing:0.3em; font-family:var(--mono);">
+    </div>
+
+    <p class="err" id="loginErr" style="display:none;"></p>
+
+    <button type="button" class="btn primary" id="loginSubmitBtn" style="justify-content:center; font-size:1.05rem;">
+      تسجيل الدخول 🚀
+    </button>
+  </div>
+
+  <!-- MAIN APP (Shown when logged in) -->
+  <div id="mainView" style="display:none; display:flex; flex-direction:column; gap:20px;">
+    
+    <!-- Top Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">📶</div>
+        <div>
+          <p class="kicker">Smart System for RFA</p>
+          <h1>Link Tracker</h1>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="user-badge">
+          <span id="userNameDisplay">--</span>
+          <span class="role-tag" id="userRoleDisplay">كوردينيتور</span>
+        </div>
+        <button class="btn primary" id="addBtn" type="button" style="display:none;">+ إضافة لينك</button>
+        <button class="btn" id="impBtn" type="button" style="display:none;">📥 استيراد شيت</button>
+        <input type="file" id="impFile" accept=".xlsx,.xls,.csv" style="display:none;">
+        <button class="btn" id="usersManageBtn" type="button" style="display:none;">👥 الكوردينيتورز</button>
+        <button class="btn" id="exportBtn" type="button">📊 تحميل CSV</button>
+        <button class="btn danger small" id="logoutBtn" type="button">خروج</button>
+      </div>
+    </header>
+
+    <!-- Coordinator Quick Focus Banner -->
+    <div class="coord-banner" id="coordBanner" style="display:none;">
+      <div>
+        <h3 id="coordGreeting">أهلاً يا مصطفى سمير! 👋</h3>
+        <p>تقدر تدوس هنا لعرض اللينكات الخاصة بيك وتعديل حالتها فوراً</p>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button class="btn" id="toggleMyLinksBtn" style="background:#fff; color:#1e3a8a; font-weight:700; border:0;">
+          🎯 عرض لينكاتي فقط
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary Box -->
+    <section class="summary" aria-label="Summary">
+      <div class="sum-l">
+        <div class="pct"><b id="pct">0%</b><span id="pctSub">0 من 0 لينكات مكتملة</span></div>
+        <div class="bar" id="bar" role="img" aria-label="Share of links done"></div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="sum-r">
+        <div class="label">توزيع اللينكات على الكوردينيتورز</div>
+        <div class="chips" id="chips"></div>
+      </div>
+    </section>
+
+    <!-- Toolbar & Filters -->
+    <div class="toolbar">
+      <div class="tools">
+        <div class="search">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg>
+          <input type="search" id="q" placeholder="ابحث باسم السايت، الكود، الكوردينيتور..." aria-label="Search">
+        </div>
+        <div class="seg" id="statusSeg" role="group"></div>
+        <select id="proj" aria-label="Project"><option value="all">كل المشاريع</option></select>
+        <select id="act" aria-label="Action type"><option value="all">كل أنواع الإجراءات</option></select>
+      </div>
+      <div class="count-bar">
+        <span id="count">جاري التحميل...</span>
+        <span id="selTools"></span>
+      </div>
+    </div>
+
+    <!-- Table of Links -->
+    <div class="table">
+      <div class="cols thead">
+        <span></span>
+        <span>#</span>
+        <span>اللينك (Site A ↔ Site B)</span>
+        <span>النوع والمشروع</span>
+        <span>الكوردينيتور</span>
+        <span>الحالة وملاحظات</span>
+      </div>
+      <div id="list">
+        <div class="empty"><b>جاري تحميل اللينكات...</b></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Bulk Selection Floating Bar -->
+<div class="bulk" id="bulk" style="display:none;">
+  <span>تم تحديد <b id="bulkN">0</b> لينك</span>
+  <select id="bulkCoordSelect" style="min-width:200px;">
+    <option value="">اختر الكوردينيتور للتعيين...</option>
+  </select>
+  <button class="btn primary" id="bulkGo" type="button">تعيين الكوردينيتور</button>
+  <button class="btn" id="bulkClear" type="button">إلغاء التحديد</button>
+</div>
+
+<!-- Modal: Add Link -->
+<div class="modal" id="addModal" style="display:none;">
+  <div class="dialog" style="max-width:580px;">
+    <h2>إضافة لينك جديد</h2>
+    <div class="dgrid">
+      <div class="f"><label>اسم Site A</label><input id="aSiteA" placeholder="مثال: Cairo Main" autocomplete="off"></div>
+      <div class="f"><label>كود Site A</label><input id="aCodeA" placeholder="مثال: CAI001" autocomplete="off"></div>
+      <div class="f"><label>اسم Site B</label><input id="aSiteB" placeholder="مثال: Giza Tower" autocomplete="off"></div>
+      <div class="f"><label>كود Site B</label><input id="aCodeB" placeholder="مثال: GIZ002" autocomplete="off"></div>
+      <div class="f"><label>المشروع (Project)</label><input id="aProject" placeholder="مثال: MW أو B2B" autocomplete="off"></div>
+      <div class="f"><label>نوع الإجراء (Action)</label><input id="aAction" placeholder="مثال: New Site, TX Boosting" autocomplete="off"></div>
+      <div class="f wide">
+        <label>تعيين كوردينيتور (اختياري)</label>
+        <select id="aCoord"><option value="">بدون كوردينيتور</option></select>
+      </div>
+    </div>
+    <p class="err" id="addErr" style="display:none;"></p>
+    <div class="drow">
+      <button class="btn" id="addCancel" type="button">إلغاء</button>
+      <button class="btn primary" id="addGo" type="button">إضافة اللينك</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Import Sheet -->
+<div class="modal" id="impModal" style="display:none;">
+  <div class="dialog" style="max-width:560px;">
+    <h2>استيراد شيت إكسيل / CSV</h2>
+    <div id="impBody"></div>
+    <div class="drow">
+      <button class="btn" id="impCancel" type="button">إلغاء</button>
+      <button class="btn primary" id="impGo" type="button">تأكيد الإضافة</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Manage Coordinators (Admin only) -->
+<div class="modal" id="usersModal" style="display:none;">
+  <div class="dialog" style="max-width:500px;">
+    <h2>إدارة الكوردينيتورز والحسابات</h2>
+    <p>الحسابات الحالية المسجلة في النظام:</p>
+    <div id="currentUsersList" style="display:flex; flex-direction:column; gap:8px;"></div>
+    
+    <hr style="border:0; border-top:1px solid var(--line); margin:8px 0;">
+    <h3 style="margin:0; font-size:1rem;">إضافة أو تعديل كوردينيتور</h3>
+    <div class="f"><label>الاسم بالكامل</label><input id="newCoordName" placeholder="مثال: حسام الدين"></div>
+    <div class="f"><label>رقم الـ PIN السري</label><input id="newCoordPin" placeholder="مثال: 4567" maxlength="6"></div>
+    <div class="drow">
+      <button class="btn" id="usersModalClose" type="button">إغلاق</button>
+      <button class="btn primary" id="saveUserBtn" type="button">حفظ الكوردينيتور</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- XLSX Library for Sheet Import -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+(function(){
+  var STATUS_LABELS = {
+    new: 'لم يتم التحديث',
+    open: 'جاري العمل (لم ينتهِ)',
+    done: 'تم الانتهاء (Done)'
+  };
+
+  // Pre-configured users / coordinators
+  var DEFAULT_USERS = [
+    { id: 'u1', username: 'mostafa', name: 'مصطفى سمير', role: 'coordinator', pin: '1234' },
+    { id: 'u2', username: 'abouzeid', name: 'أبو زيد', role: 'coordinator', pin: '2345' },
+    { id: 'u3', username: 'mourad', name: 'مراد', role: 'coordinator', pin: '3456' },
+    { id: 'u4', username: 'admin', name: 'المدير / الأدمن', role: 'admin', pin: '9999' }
+  ];
+
+  var users = DEFAULT_USERS;
+  var currentUser = null;
+  var selectedUserForLogin = null;
+  var links = [];
+  var openId = null;
+  var selectedIds = new Set();
+  var myLinksOnly = false;
+  var filters = { q: '', status: 'all', project: 'all', action: 'all', coord: 'all' };
+
+  var $ = function(s){ return document.querySelector(s); };
+
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function today(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  var toastT;
+  function toast(msg){
+    var t = $('#toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastT);
+    toastT = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+
+  function initials(n){
+    var p = String(n).trim().split(/\s+/);
+    return ((p[0]||'')[0] + (p.length > 1 ? p[p.length-1][0] : '')).toUpperCase();
+  }
+  function hue(n){
+    var h = 0;
+    for (var i=0; i<n.length; i++) h = (h*31 + n.charCodeAt(i)) % 360;
+    return h;
+  }
+  function avatar(n){
+    return n ? '<span class="av" style="background:hsl('+hue(n)+' 55% 40%)">'+esc(initials(n))+'</span>' : '<span class="av none">?</span>';
+  }
+
+  // API Call Wrapper with fallback to LocalStorage
+  async function api(path, opts){
+    opts = opts || {};
+    opts.headers = Object.assign({'Content-Type':'application/json'}, opts.headers || {});
+    try {
+      var res = await fetch(path, opts);
+      if (res.ok) return await res.json();
+      var err = await res.json().catch(function(){ return {error:'خطأ في الاتصال بالسيرفر'}; });
+      throw err;
+    } catch(e){
+      console.warn('Backend API unavailable, using local mock data:', e);
+      return mockLocalApi(path, opts);
+    }
+  }
+
+  // Local Mock Data Engine (ensures system works even if opened as a standalone static file)
+  function mockLocalApi(path, opts){
+    var method = (opts.method || 'GET').toUpperCase();
+    var storedLinks = JSON.parse(localStorage.getItem('smart_rfa_links') || '[]');
+    var storedUsers = JSON.parse(localStorage.getItem('smart_rfa_users') || JSON.stringify(DEFAULT_USERS));
+
+    if (path === '/api/users' && method === 'GET') return storedUsers;
+    if (path === '/api/login' && method === 'POST'){
+      var b = JSON.parse(opts.body);
+      var u = storedUsers.find(function(x){ return (x.username === b.username || x.name === b.username) && x.pin === b.pin; });
+      if (u) return u;
+      throw { error: 'رمز الـ PIN غير صحيح' };
+    }
+    if (path === '/api/links' && method === 'GET') return storedLinks;
+    if (path === '/api/links' && method === 'POST'){
+      var link = JSON.parse(opts.body);
+      link.id = 'L' + String(storedLinks.length + 1).padStart(3, '0');
+      link.n = storedLinks.length + 1;
+      link.updatedAt = Date.now();
+      storedLinks.push(link);
+      localStorage.setItem('smart_rfa_links', JSON.stringify(storedLinks));
+      return link;
+    }
+    if (path.indexOf('/api/links/') === 0 && method === 'PUT'){
+      var id = path.split('/api/links/')[1];
+      var patch = JSON.parse(opts.body);
+      var target = storedLinks.find(function(l){ return l.id === id; });
+      if (target){
+        Object.assign(target, patch, {updatedAt: Date.now()});
+        localStorage.setItem('smart_rfa_links', JSON.stringify(storedLinks));
+        return target;
+      }
+    }
+    if (path === '/api/links/bulk-assign' && method === 'POST'){
+      var body = JSON.parse(opts.body);
+      storedLinks.forEach(function(l){
+        if (body.ids.indexOf(l.id) >= 0) l.coordinator = body.coordinator;
+      });
+      localStorage.setItem('smart_rfa_links', JSON.stringify(storedLinks));
+      return { success: true };
+    }
+    if (path === '/api/links/bulk-import' && method === 'POST'){
+      var bImp = JSON.parse(opts.body);
+      bImp.items.forEach(function(item, idx){
+        var n = storedLinks.length + 1;
+        storedLinks.push(Object.assign({
+          id: 'L' + String(n).padStart(3, '0'),
+          n: n,
+          status: 'new',
+          withWhom: '',
+          withMe: '',
+          stuckAt: '',
+          sentDate: ''
+        }, item));
+      });
+      localStorage.setItem('smart_rfa_links', JSON.stringify(storedLinks));
+      return { success: true };
+    }
+    return {};
+  }
+
+  // Setup Real-time Stream (Server-Sent Events)
+  function setupSSE(){
+    if (typeof EventSource === 'undefined') return;
+    try {
+      var es = new EventSource('/api/stream');
+      es.addEventListener('link_update', function(e){
+        var updated = JSON.parse(e.data);
+        var idx = links.findIndex(function(l){ return l.id === updated.id; });
+        if (idx >= 0){ links[idx] = updated; render(); }
+      });
+      es.addEventListener('link_add', function(e){
+        var added = JSON.parse(e.data);
+        if (!links.some(function(l){ return l.id === added.id; })){ links.push(added); render(); }
+      });
+      es.addEventListener('link_delete', function(e){
+        var d = JSON.parse(e.data);
+        links = links.filter(function(l){ return l.id !== d.id; });
+        render();
+      });
+      es.addEventListener('links_reload', function(){ loadLinks(); });
+      es.addEventListener('links_bulk_update', function(e){
+        var d = JSON.parse(e.data);
+        links.forEach(function(l){ if (d.ids.indexOf(l.id) >= 0) l.coordinator = d.coordinator; });
+        render();
+      });
+    } catch(err){}
+  }
+
+  // UI Flow & Authentication
+  function initAuth(){
+    var savedUser = localStorage.getItem('smart_rfa_session');
+    if (savedUser){
+      try {
+        currentUser = JSON.parse(savedUser);
+        onUserLoggedIn();
+        return;
+      } catch(e){}
+    }
+    showLogin();
+  }
+
+  function showLogin(){
+    $('#loginView').style.display = 'flex';
+    $('#mainView').style.display = 'none';
+    renderUserSelectGrid();
+  }
+
+  function renderUserSelectGrid(){
+    var html = users.map(function(u){
+      var isCoord = u.role === 'coordinator';
+      var tag = isCoord ? 'كوردينيتور' : 'مدير النظام';
+      return '<button type="button" class="user-card-btn" data-username="'+esc(u.username)+'">' +
+        avatar(u.name) +
+        '<span>'+esc(u.name)+'</span>' +
+        '<span class="badge-pill">'+tag+'</span>' +
+      '</button>';
+    }).join('');
+    $('#userSelectList').innerHTML = html;
+
+    $('#userSelectList').querySelectorAll('.user-card-btn').forEach(function(btn){
+      btn.onclick = function(){
+        $('#userSelectList').querySelectorAll('.user-card-btn').forEach(function(b){ b.setAttribute('aria-pressed', 'false'); });
+        btn.setAttribute('aria-pressed', 'true');
+        selectedUserForLogin = users.find(function(u){ return u.username === btn.dataset.username; });
+        $('#loginPin').focus();
+      };
+    });
+
+    // select first user by default
+    var first = $('#userSelectList').querySelector('.user-card-btn');
+    if (first) first.click();
+  }
+
+  $('#loginSubmitBtn').onclick = async function(){
+    if (!selectedUserForLogin){
+      $('#loginErr').textContent = 'يرجى اختيار الكوردينيتور أولاً';
+      $('#loginErr').style.display = 'block';
+      return;
+    }
+    var pin = $('#loginPin').value.trim();
+    if (!pin){
+      $('#loginErr').textContent = 'يرجى كتابة رقم الـ PIN';
+      $('#loginErr').style.display = 'block';
+      return;
+    }
+
+    try {
+      var authUser = await api('/api/login', {
+        method: 'POST',
+        body: JSON.stringify({ username: selectedUserForLogin.username, pin: pin })
+      });
+      currentUser = authUser;
+      localStorage.setItem('smart_rfa_session', JSON.stringify(currentUser));
+      onUserLoggedIn();
+    } catch(err){
+      $('#loginErr').textContent = (err && err.error) || 'رقم الـ PIN غير صحيح';
+      $('#loginErr').style.display = 'block';
+    }
+  };
+
+  $('#logoutBtn').onclick = function(){
+    localStorage.removeItem('smart_rfa_session');
+    currentUser = null;
+    showLogin();
+  };
+
+  function onUserLoggedIn(){
+    $('#loginView').style.display = 'none';
+    $('#mainView').style.display = 'flex';
+    $('#userNameDisplay').textContent = currentUser.name;
+    $('#userRoleDisplay').textContent = currentUser.role === 'admin' ? 'مدير النظام' : 'كوردينيتور';
+
+    // Role-specific buttons
+    var isAdmin = currentUser.role === 'admin';
+    $('#addBtn').style.display = isAdmin ? 'inline-flex' : 'none';
+    $('#impBtn').style.display = isAdmin ? 'inline-flex' : 'none';
+    $('#usersManageBtn').style.display = isAdmin ? 'inline-flex' : 'none';
+
+    // Coordinator banner
+    if (!isAdmin){
+      $('#coordBanner').style.display = 'flex';
+      $('#coordGreeting').textContent = 'أهلاً يا ' + currentUser.name + '! 👋';
+      // filter to coordinator's links by default
+      filters.coord = currentUser.name;
+    } else {
+      $('#coordBanner').style.display = 'none';
+      filters.coord = 'all';
+    }
+
+    loadUsers();
+    loadLinks();
+    setupSSE();
+  }
+
+  async function loadUsers(){
+    try {
+      users = await api('/api/users');
+      populateCoordinatorSelects();
+    } catch(e){}
+  }
+
+  function populateCoordinatorSelects(){
+    var coords = users.filter(function(u){ return u.role === 'coordinator'; });
+    var opts = '<option value="">اختر الكوردينيتور...</option>' + coords.map(function(c){
+      return '<option value="'+esc(c.name)+'">'+esc(c.name)+'</option>';
+    }).join('');
+
+    var addSel = $('#aCoord'); if (addSel) addSel.innerHTML = '<option value="">بدون كوردينيتور</option>' + coords.map(function(c){ return '<option value="'+esc(c.name)+'">'+esc(c.name)+'</option>'; }).join('');
+    var bulkSel = $('#bulkCoordSelect'); if (bulkSel) bulkSel.innerHTML = opts;
+  }
+
+  async function loadLinks(){
+    try {
+      links = await api('/api/links');
+      render();
+    } catch(e){
+      toast('تعذر جلب البيانات من السيرفر');
+    }
+  }
+
+  function matches(d){
+    var st = d.status || 'new';
+    if (filters.status !== 'all' && st !== filters.status) return false;
+    if (filters.project !== 'all' && d.project !== filters.project) return false;
+    if (filters.action !== 'all' && d.action !== filters.action) return false;
+    if (filters.coord === '__none' && d.coordinator) return false;
+    if (filters.coord !== 'all' && filters.coord !== '__none' && d.coordinator !== filters.coord) return false;
+    if (filters.q){
+      var hay = [d.siteA, d.codeA, d.siteB, d.codeB, d.project, d.action, d.coordinator, d.withWhom, d.stuckAt, d.n].join(' ').toLowerCase();
+      var terms = filters.q.toLowerCase().split(/\s+/).filter(Boolean);
+      for (var i=0; i<terms.length; i++) if (hay.indexOf(terms[i]) < 0) return false;
+    }
+    return true;
+  }
+
+  function renderSummary(){
+    var total = links.length, done = 0, open = 0, nw = 0;
+    links.forEach(function(d){
+      var s = d.status || 'new';
+      if (s === 'done') done++;
+      else if (s === 'open') open++;
+      else nw++;
+    });
+
+    var pctVal = total ? Math.round(done / total * 100) : 0;
+    $('#pct').textContent = pctVal + '%';
+    $('#pctSub').textContent = done + ' من أصل ' + total + ' لينكات تم إنجازها';
+    $('#bar').innerHTML = '<i class="d" style="width:'+(total ? done/total*100 : 0)+'%"></i><i class="o" style="width:'+(total ? open/total*100 : 0)+'%"></i>';
+    $('#legend').innerHTML =
+      '<span><i class="dot d"></i><b>'+done+'</b> تم (Done)</span>' +
+      '<span><i class="dot o"></i><b>'+open+'</b> جاري العمل</span>' +
+      '<span><i class="dot n"></i><b>'+nw+'</b> لم يتم التحديث</span>';
+
+    var by = new Map(); var none = {t:0, d:0};
+    links.forEach(function(d){
+      var c = d.coordinator;
+      if (!c){ none.t++; if (d.status === 'done') none.d++; return; }
+      var r = by.get(c) || {t:0, d:0}; r.t++; if (d.status === 'done') r.d++; by.set(c, r);
+    });
+
+    var html = chip('all', 'الكل', total, null, true);
+    Array.from(by.keys()).sort().forEach(function(c){
+      var r = by.get(c);
+      html += chip(c, c, r.t, r.d);
+    });
+    if (none.t) html += chip('__none', 'بدون كوردينيتور', none.t, none.d);
+    $('#chips').innerHTML = html;
+  }
+
+  function chip(key, label, t, d, isAll){
+    var av = isAll ? '' : (key === '__none' ? avatar('') : avatar(label));
+    return '<button type="button" class="cchip'+(isAll?' all':'')+'" data-coord="'+esc(key)+'" aria-pressed="'+(filters.coord===key)+'">'+av+esc(label)+'<small>'+(d==null ? t : d+'/'+t)+'</small></button>';
+  }
+
+  function renderSeg(){
+    var opts = [['all','الكل'],['new','لم يتم التحديث'],['open','جاري العمل'],['done','تم الانتهاء']];
+    $('#statusSeg').innerHTML = opts.map(function(o){
+      return '<button type="button" data-status="'+o[0]+'" aria-pressed="'+(filters.status===o[0])+'">'+o[1]+'</button>';
+    }).join('');
+  }
+
+  function renderFiltersOptions(){
+    var ps = Array.from(new Set(links.map(function(d){ return d.project; }).filter(Boolean))).sort();
+    $('#proj').innerHTML = '<option value="all">كل المشاريع</option>' + ps.map(function(p){ return '<option value="'+esc(p)+'">'+esc(p)+'</option>'; }).join('');
+    $('#proj').value = filters.project;
+
+    var as = Array.from(new Set(links.map(function(d){ return d.action; }).filter(Boolean))).sort();
+    $('#act').innerHTML = '<option value="all">كل أنواع الإجراءات</option>' + as.map(function(a){ return '<option value="'+esc(a)+'">'+esc(a)+'</option>'; }).join('');
+    $('#act').value = filters.action;
+  }
+
+  function editorHTML(id, d){
+    var st = d.status || 'new';
+    var f = function(name){ return 'f-'+id+'-'+name; };
+    var last = d.updatedAt ? '<p class="stamp">آخر تعديل '+(d.updatedByName ? 'بواسطة '+esc(d.updatedByName)+', ' : '')+new Date(d.updatedAt).toLocaleString('ar-EG')+'</p>' : '';
+    var isAdmin = currentUser && currentUser.role === 'admin';
+
+    return '<div class="editor">' +
+      '<div class="panel"><h3>المسؤولية والتسليم</h3>' +
+        (isAdmin ? '<div class="f"><label for="'+f('coordinator')+'">كوردينيتور اللينك</label><input id="'+f('coordinator')+'" data-f="coordinator" data-id="'+id+'" value="'+esc(d.coordinator||'')+'" placeholder="اسم الكوردينيتور"></div>' : '') +
+        '<div class="f"><label for="'+f('withWhom')+'">اللينك مع مين دلوقتي؟ (اسم التيم أو الشخص)</label><input id="'+f('withWhom')+'" data-f="withWhom" data-id="'+id+'" value="'+esc(d.withWhom||'')+'" placeholder="مثال: تيم الفايبر، تيم التركيبات..."></div>' +
+        '<div class="f"><span class="lb">هل اللينك مع الكوردينيتور حالياً؟</span>' +
+          '<div class="seg" role="group">' +
+            '<button type="button" data-set="withMe" data-id="'+id+'" data-val="yes" aria-pressed="'+(d.withMe==='yes')+'">نعم (معايا)</button>' +
+            '<button type="button" data-set="withMe" data-id="'+id+'" data-val="no" aria-pressed="'+(d.withMe==='no')+'">لا (مش معايا)</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="panel"><h3>حالة الإنجاز والـ RFA</h3>' +
+        '<div class="f"><span class="lb">حالة اللينك</span>' +
+          '<div class="seg" role="group">' +
+            '<button type="button" data-set="status" data-id="'+id+'" data-val="open" aria-pressed="'+(st==='open')+'">جاري العمل</button>' +
+            '<button type="button" data-set="status" data-id="'+id+'" data-val="done" aria-pressed="'+(st==='done')+'">تم الانتهاء (Done)</button>' +
+          '</div>' +
+        '</div>' +
+        (st === 'done'
+          ? '<div class="f"><label for="'+f('sentDate')+'">تاريخ إرسال الـ RFA</label><input type="date" id="'+f('sentDate')+'" data-f="sentDate" data-id="'+id+'" value="'+esc(d.sentDate||'')+'" style="max-width:240px"><span class="hint">يتم ملؤه تلقائياً بتاريخ اليوم عند اختيار Done.</span></div>'
+          : '') +
+        '<div class="f"><label for="'+f('stuckAt')+'">الملاحظات / معلق على إيه؟</label><textarea id="'+f('stuckAt')+'" data-f="stuckAt" data-id="'+id+'" placeholder="اكتب أي مشكلة أو تفاصيل معلقة...">'+esc(d.stuckAt||'')+'</textarea></div>' +
+      '</div>' + last +
+      (isAdmin ? '<div class="f" style="grid-column:1/-1; align-items:flex-start;"><button type="button" class="btn danger small" data-del="'+id+'">حذف هذا اللينك</button></div>' : '') +
+    '</div>';
+  }
+
+  function rowHTML(d){
+    var id = d.id, st = d.status || 'new', open = openId === id;
+    var who = '<div class="t">' + (d.coordinator ? '<b>'+esc(d.coordinator)+'</b>' : '<span class="none">بدون كوردينيتور</span>');
+    if (d.withWhom) who += '<div class="sm">مع: '+esc(d.withWhom)+'</div>';
+    if (d.withMe === 'yes') who += '<div class="sm" style="color:var(--accent);">✓ مع الكوردينيتور</div>';
+    else if (d.withMe === 'no') who += '<div class="sm" style="color:var(--warn);">✗ ليس مع الكوردينيتور</div>';
+    who += '</div>';
+
+    var sub = st === 'done' ? [(d.sentDate ? 'أُرسل بتاريخ ' + d.sentDate : ''), d.stuckAt || ''].filter(Boolean).join(' · ') : (d.stuckAt || '');
+
+    return '<article class="row st-'+st+(open?' open':'')+'" data-id="'+id+'">' +
+      '<div class="cols sum" role="button" tabindex="0">' +
+        '<label class="chk"><input type="checkbox" data-sel="'+id+'"'+(selectedIds.has(id)?' checked':'')+'></label>' +
+        '<span class="num">'+String(d.n).padStart(2,'0')+'</span>' +
+        '<div class="sites">' +
+          '<div class="site"><span class="tag">A</span><span class="nm">'+esc(d.siteA)+'</span><span class="cd">'+esc(d.codeA)+'</span></div>' +
+          '<div class="site"><span class="tag">B</span><span class="nm">'+esc(d.siteB)+'</span><span class="cd">'+esc(d.codeB)+'</span></div>' +
+        '</div>' +
+        '<div class="meta"><span class="chip">'+esc(d.project)+'</span><span class="chip ghost">'+esc(d.action)+'</span></div>' +
+        '<div class="who">'+avatar(d.coordinator)+who+'</div>' +
+        '<div class="state"><span class="pill '+st+'"><i></i>'+STATUS_LABELS[st]+'</span>'+(sub?'<span class="sm" title="'+esc(sub)+'">'+esc(sub)+'</span>':'')+'</div>' +
+      '</div>' + (open ? editorHTML(id, d) : '') +
+    '</article>';
+  }
+
+  function render(){
+    renderSummary();
+    renderSeg();
+    renderFiltersOptions();
+
+    var shown = links.filter(matches);
+    var el = $('#list');
+    if (!links.length){
+      el.innerHTML = '<div class="empty"><b>لا توجد لينكات مسجلة بعد</b>يمكن لمدير النظام إضافة لينكات جديدة أو استيراد شيت إكسيل.</div>';
+    } else if (!shown.length){
+      el.innerHTML = '<div class="empty"><b>لا توجد نتائج تطابق البحث</b>جرب تغيير الفلاتر أو البحث.</div>';
+    } else {
+      el.innerHTML = shown.map(rowHTML).join('');
+    }
+
+    $('#count').textContent = 'عرض ' + shown.length + ' من أصل ' + links.length + ' لينك';
+    $('#selTools').innerHTML = shown.length ? '<button class="btn small" type="button" id="selShown">تحديد كل المعروض ('+shown.length+')</button>' : '';
+
+    var n = selectedIds.size;
+    $('#bulk').style.display = n ? 'flex' : 'none';
+    $('#bulkN').textContent = n;
+  }
+
+  // Save changes to backend
+  async function saveLink(id, patch){
+    patch.by = currentUser ? currentUser.id : null;
+    patch.byName = currentUser ? currentUser.name : 'Unknown';
+
+    try {
+      var updated = await api('/api/links/' + id, {
+        method: 'PUT',
+        body: JSON.stringify(patch)
+      });
+      var idx = links.findIndex(function(l){ return l.id === id; });
+      if (idx >= 0) links[idx] = Object.assign(links[idx], updated);
+      toast('تم الحفظ بنجاح ✓');
+      render();
+    } catch(err){
+      toast('تعذر حفظ التعديل');
+    }
+  }
+
+  // Event Listeners for Table
+  var list = $('#list');
+  list.addEventListener('click', function(e){
+    var t = e.target;
+    var sel = t.closest && t.closest('input[data-sel]');
+    if (sel){
+      if (sel.checked) selectedIds.add(sel.dataset.sel);
+      else selectedIds.delete(sel.dataset.sel);
+      render();
+      return;
+    }
+    if (t.closest && t.closest('.chk')) return;
+
+    var b = t.closest && t.closest('button[data-set]');
+    if (b){
+      var id = b.dataset.id, f = b.dataset.set, v = b.dataset.val;
+      var cur = links.find(function(l){ return l.id === id; }) || {};
+      if (f === 'withMe') saveLink(id, { withMe: cur.withMe === v ? '' : v });
+      else if (f === 'status'){
+        if (v === 'done') saveLink(id, { status: 'done', sentDate: cur.sentDate || today() });
+        else saveLink(id, { status: 'open' });
+      }
+      return;
+    }
+
+    var del = t.closest && t.closest('button[data-del]');
+    if (del){
+      if (del.dataset.armed !== '1'){
+        del.dataset.armed = '1';
+        del.textContent = 'اضغط مرة أخرى للتأكيد على الحذف';
+        return;
+      }
+      deleteLink(del.dataset.del);
+      return;
+    }
+
+    if (t.closest && t.closest('.editor')) return;
+
+    var sum = t.closest && t.closest('.sum');
+    if (sum){
+      var rid = sum.parentNode.dataset.id;
+      openId = openId === rid ? null : rid;
+      render();
+    }
+  });
+
+  list.addEventListener('change', function(e){
+    var t = e.target;
+    if (!t.dataset || !t.dataset.f) return;
+    var id = t.dataset.id, val = t.value.trim();
+    var p = {};
+    p[t.dataset.f] = val;
+    if (t.dataset.f === 'stuckAt' && val){
+      var cur = links.find(function(l){ return l.id === id; }) || {};
+      if (!cur.status || cur.status === 'new') p.status = 'open';
+    }
+    saveLink(id, p);
+  });
+
+  async function deleteLink(id){
+    try {
+      await api('/api/links/' + id, { method: 'DELETE' });
+      links = links.filter(function(l){ return l.id !== id; });
+      selectedIds.delete(id);
+      openId = null;
+      toast('تم حذف اللينك');
+      render();
+    } catch(e){
+      toast('تعذر حذف اللينك');
+    }
+  }
+
+  // Filter Chips and Status clicks
+  $('#chips').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-coord]');
+    if (!b) return;
+    filters.coord = b.dataset.coord;
+    render();
+  });
+  $('#statusSeg').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-status]');
+    if (b){ filters.status = b.dataset.status; render(); }
+  });
+  $('#proj').addEventListener('change', function(e){ filters.project = e.target.value; render(); });
+  $('#act').addEventListener('change', function(e){ filters.action = e.target.value; render(); });
+  $('#q').addEventListener('input', function(e){ filters.q = e.target.value.trim(); render(); });
+
+  $('#toggleMyLinksBtn').onclick = function(){
+    if (!currentUser) return;
+    if (filters.coord === currentUser.name){
+      filters.coord = 'all';
+      this.textContent = '🎯 عرض لينكاتي فقط';
+    } else {
+      filters.coord = currentUser.name;
+      this.textContent = '🌐 عرض كل اللينكات';
+    }
+    render();
+  };
+
+  // Bulk Actions
+  $('#selTools').addEventListener('click', function(e){
+    if (e.target.id === 'selShown'){
+      links.filter(matches).forEach(function(d){ selectedIds.add(d.id); });
+      render();
+    }
+  });
+  $('#bulkClear').onclick = function(){ selectedIds.clear(); render(); };
+  $('#bulkGo').onclick = async function(){
+    var name = $('#bulkCoordSelect').value;
+    if (!name){ toast('اختر اسم الكوردينيتور أولاً'); return; }
+    var ids = Array.from(selectedIds);
+    try {
+      await api('/api/links/bulk-assign', {
+        method: 'POST',
+        body: JSON.stringify({ ids: ids, coordinator: name, by: currentUser.id, byName: currentUser.name })
+      });
+      ids.forEach(function(id){
+        var item = links.find(function(l){ return l.id === id; });
+        if (item) item.coordinator = name;
+      });
+      selectedIds.clear();
+      toast('تم تعيين ' + name + ' لـ ' + ids.length + ' لينك بنجاح');
+      render();
+    } catch(e){
+      toast('حدث خطأ أثناء التعيين');
+    }
+  };
+
+  // Add Link Modal
+  $('#addBtn').onclick = function(){
+    ['aSiteA','aCodeA','aSiteB','aCodeB','aProject','aAction'].forEach(function(id){ $('#'+id).value = ''; });
+    $('#aCoord').value = '';
+    $('#addErr').style.display = 'none';
+    $('#addModal').style.display = 'grid';
+    $('#aSiteA').focus();
+  };
+  $('#addCancel').onclick = function(){ $('#addModal').style.display = 'none'; };
+  $('#addGo').onclick = async function(){
+    var r = {
+      siteA: $('#aSiteA').value.trim(),
+      codeA: $('#aCodeA').value.trim(),
+      siteB: $('#aSiteB').value.trim(),
+      codeB: $('#aCodeB').value.trim(),
+      project: $('#aProject').value.trim().toUpperCase(),
+      action: $('#aAction').value.trim(),
+      coordinator: $('#aCoord').value.trim(),
+      by: currentUser.id,
+      byName: currentUser.name
+    };
+    if (!r.siteA || !r.siteB){
+      $('#addErr').textContent = 'يرجى كتابة اسم الموقعين Site A و Site B';
+      $('#addErr').style.display = 'block';
+      return;
+    }
+    try {
+      var added = await api('/api/links', { method: 'POST', body: JSON.stringify(r) });
+      links.push(added);
+      $('#addModal').style.display = 'none';
+      toast('تمت إضافة اللينك بنجاح');
+      render();
+    } catch(err){
+      $('#addErr').textContent = (err && err.error) || 'تعذر إضافة اللينك';
+      $('#addErr').style.display = 'block';
+    }
+  };
+
+  // Excel / CSV Import
+  var pendingImport = null;
+  $('#impBtn').onclick = function(){ $('#impFile').click(); };
+  $('#impCancel').onclick = function(){ $('#impModal').style.display = 'none'; pendingImport = null; };
+  $('#impFile').onchange = async function(e){
+    var f = e.target.files[0]; e.target.value = ''; if (!f) return;
+    try {
+      var buf = await f.arrayBuffer();
+      var wb = XLSX.read(buf, {type:'array'});
+      var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {defval:''});
+      var fresh = [];
+      rows.forEach(function(row){
+        var siteA = '', codeA = '', siteB = '', codeB = '', proj = '', act = '', coord = '';
+        for (var k in row){
+          var norm = k.toLowerCase().replace(/[^a-z0-9]/g, '');
+          if (norm.indexOf('sitea') >= 0 && norm.indexOf('code') >= 0) codeA = row[k];
+          else if (norm.indexOf('sitea') >= 0) siteA = row[k];
+          else if (norm.indexOf('siteb') >= 0 && norm.indexOf('code') >= 0) codeB = row[k];
+          else if (norm.indexOf('siteb') >= 0) siteB = row[k];
+          else if (norm.indexOf('proj') >= 0) proj = row[k];
+          else if (norm.indexOf('action') >= 0) act = row[k];
+          else if (norm.indexOf('coord') >= 0) coord = row[k];
+        }
+        if (siteA || siteB){
+          fresh.push({ siteA: siteA, codeA: codeA, siteB: siteB, codeB: codeB, project: proj, action: act, coordinator: coord });
+        }
+      });
+
+      if (!fresh.length){
+        toast('لم يتم العثور على بيانات صالحة في الشيت');
+        return;
+      }
+
+      pendingImport = { items: fresh, file: f.name };
+      $('#impBody').innerHTML = '<p><b>' + esc(f.name) + '</b>: تم العثور على <b>' + fresh.length + '</b> لينك جاهز للإضافة.</p>' +
+        '<div style="max-height:160px; overflow:auto; border:1px solid var(--line); border-radius:8px; padding:8px;">' +
+        fresh.slice(0, 5).map(function(item){
+          return '<div style="font-size:0.85rem; margin-bottom:4px;">' + esc(item.siteA) + ' ↔ ' + esc(item.siteB) + ' (' + esc(item.project) + ')</div>';
+        }).join('') + (fresh.length > 5 ? '<div style="color:var(--muted); font-size:0.8rem;">وغيرها ' + (fresh.length - 5) + ' لينك إضافي...</div>' : '') +
+        '</div>';
+      $('#impModal').style.display = 'grid';
+    } catch(err){
+      toast('تعذر قراءة ملف الشيت');
+    }
+  };
+
+  $('#impGo').onclick = async function(){
+    if (!pendingImport) return;
+    this.disabled = true;
+    try {
+      await api('/api/links/bulk-import', {
+        method: 'POST',
+        body: JSON.stringify({ items: pendingImport.items, fileName: pendingImport.file, by: currentUser.id, byName: currentUser.name })
+      });
+      await loadLinks();
+      $('#impModal').style.display = 'none';
+      toast('تم استيراد ' + pendingImport.items.length + ' لينك بنجاح');
+      pendingImport = null;
+    } catch(err){
+      toast('حدث خطأ أثناء الاستيراد');
+    }
+    this.disabled = false;
+  };
+
+  // CSV Export
+  $('#exportBtn').onclick = function(){
+    var head = ['#','Site A Name','Site A Code','Site B Name','Site B Code','Project','Action Type','Coordinator','Status','With Whom','With Coordinator','Stuck on / Notes','RFA Sent Date'];
+    var rows = links.map(function(d){
+      return [
+        d.n, d.siteA, d.codeA, d.siteB, d.codeB, d.project, d.action, d.coordinator||'',
+        STATUS_LABELS[d.status||'new'], d.withWhom||'', d.withMe==='yes'?'Yes':d.withMe==='no'?'No':'', d.stuckAt||'', d.sentDate||''
+      ].map(function(v){ return '"' + String(v||'').replace(/"/g, '""') + '"'; }).join(',');
+    });
+    var csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [head.join(',')].concat(rows).join('\r\n');
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'RFA-Links-' + today() + '.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Manage Coordinators Modal
+  $('#usersManageBtn').onclick = function(){
+    renderUsersManager();
+    $('#usersModal').style.display = 'grid';
+  };
+  $('#usersModalClose').onclick = function(){ $('#usersModal').style.display = 'none'; };
+
+  function renderUsersManager(){
+    $('#currentUsersList').innerHTML = users.map(function(u){
+      return '<div style="display:flex; justify-content:space-between; align-items:center; background:var(--surface2); padding:8px 12px; border-radius:8px; border:1px solid var(--line);">' +
+        '<div><b>' + esc(u.name) + '</b> <span style="font-size:0.8rem; color:var(--muted);">(' + (u.role === 'admin' ? 'مدير' : 'كوردينيتور') + ')</span></div>' +
+        '<div style="font-family:var(--mono); font-size:0.85rem; color:var(--accent);">PIN: ' + esc(u.pin) + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  $('#saveUserBtn').onclick = async function(){
+    var name = $('#newCoordName').value.trim();
+    var pin = $('#newCoordPin').value.trim();
+    if (!name || !pin){ toast('اكتب الاسم ورقم الـ PIN'); return; }
+    try {
+      await api('/api/users', {
+        method: 'POST',
+        body: JSON.stringify({ name: name, pin: pin, role: 'coordinator' })
+      });
+      await loadUsers();
+      renderUsersManager();
+      $('#newCoordName').value = '';
+      $('#newCoordPin').value = '';
+      toast('تم حفظ الكوردينيتور بنجاح');
+    } catch(err){
+      toast('حدث خطأ في حفظ الكوردينيتور');
+    }
+  };
+
+  // Start
+  initAuth();
+})();
+</script>
+
+</body>
+</html>
