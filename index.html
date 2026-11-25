@@ -1,64 +1,66 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Smart System for RFA | Link Tracker</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+  <title>Link Tracker | Smart System for RFA</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
   <style>
     :root {
-      --bg: #f4f6fa;
+      --bg: #eef1f5;
       --surface: #ffffff;
-      --surface2: #f8fafc;
-      --line: #e2e8f0;
-      --line2: #edf2f7;
-      --fg: #0f172a;
-      --muted: #64748b;
-      --accent: #2563eb;
-      --accent-hover: #1d4ed8;
+      --surface2: #f6f8fa;
+      --line: #d9dee6;
+      --line2: #e8ecf1;
+      --fg: #101b2a;
+      --muted: #5a6879;
+      --accent: #1d5bd8;
+      --accent-hover: #174ab8;
       --accent-fg: #ffffff;
-      --accent-soft: #eff6ff;
-      --ok: #16a34a;
-      --ok-bg: #dcfce7;
-      --ok-bar: #22c55e;
-      --warn: #d97706;
-      --warn-bg: #fef3c7;
-      --warn-bar: #f59e0b;
-      --new: #64748b;
-      --new-bg: #f1f5f9;
-      --new-bar: #cbd5e1;
+      --accent-soft: #e2ebfb;
+      --ok: #0d7a49;
+      --ok-bg: #d9f2e4;
+      --ok-bar: #1fa36a;
+      --warn: #8a5600;
+      --warn-bg: #fae9c3;
+      --warn-bar: #e0a21b;
+      --new: #566474;
+      --new-bg: #e4e8ee;
+      --new-bar: #b9c2cd;
       --danger: #dc2626;
       --danger-bg: #fee2e2;
-      --font: "Cairo", "IBM Plex Sans", system-ui, -apple-system, sans-serif;
-      --mono: "IBM Plex Mono", Consolas, monospace;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --font: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+      --shadow: 0 1px 2px rgba(16,27,42,.06), 0 4px 16px rgba(16,27,42,.05);
+      --shadow-lg: 0 10px 25px rgba(16,27,42,.1);
     }
 
-    [data-theme="dark"] {
-      --bg: #0b1120;
-      --surface: #131d31;
-      --surface2: #1e293b;
-      --line: #334155;
-      --line2: #1e293b;
-      --fg: #f1f5f9;
-      --muted: #94a3b8;
-      --accent: #3b82f6;
-      --accent-hover: #60a5fa;
-      --accent-fg: #ffffff;
-      --accent-soft: #1e3a8a;
-      --ok: #4ade80;
-      --ok-bg: #064e3b;
-      --ok-bar: #22c55e;
-      --warn: #fbbf24;
-      --warn-bg: #451a03;
-      --warn-bar: #f59e0b;
-      --new: #94a3b8;
-      --new-bg: #1e293b;
-      --new-bar: #475569;
-      --danger: #f87171;
-      --danger-bg: #450a0a;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0c1117;
+        --surface: #151b23;
+        --surface2: #1a212b;
+        --line: #2a3340;
+        --line2: #222b36;
+        --fg: #e8edf3;
+        --muted: #9aa7b7;
+        --accent: #6fa0ff;
+        --accent-hover: #5086ee;
+        --accent-fg: #0a1220;
+        --accent-soft: #1b2a47;
+        --ok: #5fd39a;
+        --ok-bg: #123324;
+        --ok-bar: #2fb97d;
+        --warn: #f2c35c;
+        --warn-bg: #3a2e10;
+        --warn-bar: #e0a21b;
+        --new: #a9b4c2;
+        --new-bg: #252d38;
+        --new-bar: #465160;
+        --danger: #f87171;
+        --danger-bg: #450a0a;
+        --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 20px rgba(0,0,0,.25);
+      }
     }
 
     * { box-sizing: border-box; }
@@ -67,8 +69,8 @@
       background: var(--bg);
       color: var(--fg);
       font-family: var(--font);
-      font-size: 15px;
-      line-height: 1.6;
+      font-size: 14.5px;
+      line-height: 1.5;
       padding: 24px 16px 60px;
       min-height: 100vh;
     }
@@ -92,8 +94,8 @@
     header {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 18px 24px;
+      border-radius: 14px;
+      padding: 16px 22px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
@@ -108,29 +110,29 @@
       gap: 14px;
     }
     .brand-icon {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #1d5bd8, #1240a0);
       color: #fff;
-      border-radius: 12px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
-      font-size: 1.4rem;
-      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+      font-size: 1.3rem;
+      box-shadow: 0 4px 12px rgba(29,91,216,0.3);
     }
     .kicker {
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--muted);
       margin: 0 0 2px;
     }
     h1 {
       margin: 0;
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
 
     .header-actions {
@@ -143,29 +145,31 @@
     .user-badge {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       background: var(--surface2);
       border: 1px solid var(--line);
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 99px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
     }
     .user-badge .role-tag {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       background: var(--accent-soft);
       color: var(--accent);
-      padding: 2px 8px;
+      padding: 1px 7px;
       border-radius: 99px;
+      font-family: var(--mono);
+      font-weight: 600;
     }
 
     .btn {
       border: 1px solid var(--line);
       background: var(--surface);
-      border-radius: 10px;
-      padding: 8px 16px;
-      font-weight: 600;
-      min-height: 42px;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-weight: 500;
+      min-height: 40px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -176,7 +180,6 @@
       background: var(--accent);
       color: var(--accent-fg);
       border-color: var(--accent);
-      box-shadow: 0 2px 6px rgba(37,99,235,0.25);
     }
     .btn.primary:hover {
       background: var(--accent-hover);
@@ -192,47 +195,46 @@
       color: #fff;
     }
     .btn.small {
-      padding: 4px 12px;
-      min-height: 32px;
-      font-size: 0.85rem;
+      padding: 3px 10px;
+      min-height: 30px;
+      font-size: 0.84rem;
     }
 
     /* Summary Card */
     .summary {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 14px;
       box-shadow: var(--shadow);
       display: grid;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
       overflow: hidden;
     }
     .sum-l {
-      padding: 22px 26px;
+      padding: 20px 22px;
       display: flex;
       flex-direction: column;
       gap: 14px;
-      border-left: 1px solid var(--line2);
+      border-right: 1px solid var(--line2);
     }
     .pct {
       display: flex;
       align-items: baseline;
-      gap: 12px;
+      gap: 10px;
     }
     .pct b {
-      font-size: 3rem;
+      font-size: 2.9rem;
       line-height: 1;
-      font-weight: 800;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
       font-family: var(--mono);
-      color: var(--fg);
     }
     .pct span {
       color: var(--muted);
       font-size: 0.95rem;
-      font-weight: 600;
     }
     .bar {
-      height: 14px;
+      height: 12px;
       border-radius: 99px;
       background: var(--new-bg);
       overflow: hidden;
@@ -244,27 +246,27 @@
     .legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 24px;
-      font-size: 0.9rem;
+      gap: 8px 20px;
+      font-size: 0.88rem;
       color: var(--muted);
     }
-    .legend span { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
-    .legend b { color: var(--fg); font-weight: 700; font-family: var(--mono); }
-    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .legend span { display: inline-flex; align-items: center; gap: 7px; }
+    .legend b { color: var(--fg); font-weight: 600; font-variant-numeric: tabular-nums; font-family: var(--mono); }
+    .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
     .dot.d { background: var(--ok-bar); }
     .dot.o { background: var(--warn-bar); }
     .dot.n { background: var(--new-bar); }
 
     .sum-r {
-      padding: 22px 26px;
+      padding: 18px 22px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
     }
@@ -273,21 +275,20 @@
       border: 1px solid var(--line);
       background: var(--surface);
       border-radius: 99px;
-      padding: 4px 14px 4px 6px;
+      padding: 4px 12px 4px 5px;
       display: inline-flex;
       gap: 8px;
       align-items: center;
-      font-size: 0.9rem;
-      font-weight: 600;
-      min-height: 38px;
+      font-size: 0.88rem;
+      min-height: 34px;
       transition: all 0.15s ease;
     }
-    .cchip.all { padding-right: 14px; padding-left: 14px; }
+    .cchip.all { padding-left: 12px; }
     .cchip:hover { border-color: var(--accent); }
     .cchip small {
       color: var(--muted);
       font-family: var(--mono);
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       background: var(--surface2);
       padding: 1px 6px;
       border-radius: 99px;
@@ -302,13 +303,13 @@
       color: inherit;
     }
     .av {
-      width: 26px;
-      height: 26px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       display: inline-grid;
       place-items: center;
-      font-size: 0.72rem;
-      font-weight: 800;
+      font-size: 0.68rem;
+      font-weight: 700;
       color: #fff;
       flex: none;
     }
@@ -316,25 +317,25 @@
 
     /* Coordinator Quick Banner */
     .coord-banner {
-      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      background: linear-gradient(135deg, #1d5bd8, #103b9b);
       color: #fff;
-      border-radius: 16px;
-      padding: 16px 24px;
+      border-radius: 14px;
+      padding: 16px 22px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      box-shadow: 0 4px 16px rgba(37,99,235,0.25);
+      box-shadow: 0 4px 16px rgba(29,91,216,0.2);
     }
-    .coord-banner h3 { margin: 0; font-size: 1.15rem; font-weight: 700; }
-    .coord-banner p { margin: 2px 0 0; opacity: 0.88; font-size: 0.9rem; }
+    .coord-banner h3 { margin: 0; font-size: 1.15rem; font-weight: 600; }
+    .coord-banner p { margin: 2px 0 0; opacity: 0.88; font-size: 0.88rem; }
 
     /* Toolbar */
     .toolbar {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
     .tools {
       display: flex;
@@ -349,11 +350,11 @@
     }
     .search svg {
       position: absolute;
-      right: 14px;
+      left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       color: var(--muted);
       pointer-events: none;
     }
@@ -361,32 +362,30 @@
       width: 100%;
       border: 1px solid var(--line);
       background: var(--surface);
-      border-radius: 10px;
-      padding: 10px 42px 10px 14px;
-      min-height: 42px;
+      border-radius: 8px;
+      padding: 9px 12px 9px 36px;
+      min-height: 40px;
     }
     select {
       border: 1px solid var(--line);
       background: var(--surface);
-      border-radius: 10px;
-      padding: 9px 12px;
-      min-height: 42px;
-      font-weight: 600;
+      border-radius: 8px;
+      padding: 8px 10px;
+      min-height: 40px;
     }
     .seg {
       display: inline-flex;
       border: 1px solid var(--line);
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
       background: var(--surface);
     }
     .seg button {
       border: 0;
       background: none;
-      padding: 8px 14px;
-      min-height: 40px;
+      padding: 8px 13px;
+      min-height: 38px;
       border-left: 1px solid var(--line);
-      font-weight: 600;
       white-space: nowrap;
     }
     .seg button:first-child { border-left: 0; }
@@ -394,12 +393,12 @@
     .seg button[aria-pressed="true"] {
       background: var(--accent-soft);
       color: var(--accent);
+      font-weight: 600;
     }
 
     .count-bar {
       color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.86rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -407,33 +406,33 @@
       flex-wrap: wrap;
     }
 
-    /* Links Table */
+    /* Table */
     .table {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 14px;
       box-shadow: var(--shadow);
       overflow: hidden;
     }
     .cols {
       display: grid;
-      grid-template-columns: 32px 50px minmax(0, 2.5fr) 140px minmax(0, 1.4fr) 160px;
-      gap: 16px;
+      grid-template-columns: 30px 46px minmax(0, 2.5fr) 150px minmax(0, 1.4fr) 170px;
+      gap: 14px;
       align-items: center;
-      padding: 14px 20px;
+      padding: 12px 18px;
     }
     .thead {
       background: var(--surface2);
       border-bottom: 1px solid var(--line);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
     }
     .row {
       border-bottom: 1px solid var(--line2);
-      border-right: 5px solid var(--stripe, var(--new-bar));
+      border-left: 4px solid var(--stripe, var(--new-bar));
       transition: background 0.15s ease;
     }
     .row:last-child { border-bottom: 0; }
@@ -443,16 +442,16 @@
     .sum { cursor: pointer; }
     .sum:hover { background: var(--surface2); }
     .chk input {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
       accent-color: var(--accent);
       cursor: pointer;
     }
     .num {
       font-family: var(--mono);
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 0.84rem;
       color: var(--muted);
+      font-variant-numeric: tabular-nums;
     }
     .sites {
       display: flex;
@@ -462,43 +461,43 @@
     }
     .site {
       display: flex;
-      gap: 8px;
+      gap: 9px;
       align-items: baseline;
       min-width: 0;
       flex-wrap: wrap;
     }
     .tag {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-size: 0.68rem;
+      font-weight: 500;
       background: var(--new-bg);
-      color: var(--fg);
-      border-radius: 5px;
-      padding: 1px 6px;
+      color: var(--new);
+      border-radius: 4px;
+      padding: 0 5px;
     }
-    .nm { font-weight: 700; overflow-wrap: anywhere; }
-    .cd { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
-    .meta { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+    .nm { font-weight: 600; overflow-wrap: anywhere; }
+    .cd { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+    .meta { display: flex; flex-direction: column; gap: 5px; align-items: flex-start; }
     .chip {
-      font-size: 0.76rem;
-      border-radius: 6px;
-      padding: 2px 8px;
+      font-size: 0.74rem;
+      border-radius: 5px;
+      padding: 1px 8px;
       background: var(--accent-soft);
       color: var(--accent);
       font-family: var(--mono);
-      font-weight: 700;
+      font-weight: 500;
     }
-    .chip.ghost { background: var(--new-bg); color: var(--muted); }
+    .chip.ghost { background: var(--new-bg); color: var(--new); }
     .who { min-width: 0; display: flex; gap: 10px; align-items: flex-start; }
-    .who b { font-weight: 700; }
+    .who b { font-weight: 600; }
     .who .sm { font-size: 0.82rem; color: var(--muted); }
-    .who .none { color: var(--muted); font-style: italic; }
+    .who .none { color: var(--muted); }
     .state { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
     .pill {
-      font-size: 0.8rem;
-      font-weight: 700;
+      font-size: 0.78rem;
+      font-weight: 600;
       border-radius: 99px;
-      padding: 3px 12px;
+      padding: 2px 10px 2px 8px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -517,44 +516,35 @@
       overflow: hidden;
     }
 
-    /* Expanded Editor */
+    /* Editor */
     .editor {
       border-top: 1px solid var(--line2);
-      padding: 22px;
+      padding: 18px 20px 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
       background: var(--surface2);
     }
     .panel {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 18px;
+      border-radius: 10px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
     .panel h3 {
       margin: 0;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
-      border-bottom: 1px solid var(--line2);
-      padding-bottom: 8px;
     }
-    .f {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .f label, .f .lb {
-      font-size: 0.86rem;
-      font-weight: 700;
-      color: var(--fg);
-    }
+    .f { display: flex; flex-direction: column; gap: 6px; }
+    .f label, .f .lb { font-size: 0.84rem; font-weight: 600; }
     .f input, .f textarea {
       border: 1px solid var(--line);
       background: var(--bg);
@@ -563,15 +553,14 @@
       min-height: 40px;
       width: 100%;
     }
-    .f textarea { min-height: 90px; resize: vertical; }
+    .f textarea { min-height: 92px; resize: vertical; }
     .hint { font-size: 0.8rem; color: var(--muted); }
     .stamp {
       grid-column: 1 / -1;
       margin: 0;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-family: var(--mono);
-      text-align: left;
     }
 
     /* Bulk actions bar */
@@ -582,23 +571,22 @@
       bottom: 0;
       z-index: 50;
       background: var(--surface);
-      border-top: 3px solid var(--accent);
-      padding: 14px 24px;
+      border-top: 2px solid var(--accent);
+      padding: 12px 24px;
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 -8px 24px rgba(0,0,0,0.12);
+      box-shadow: 0 -8px 28px rgba(0,0,0,.14);
     }
 
-    /* Modals & Dialogs */
+    /* Modals */
     .modal {
       position: fixed;
       inset: 0;
       z-index: 90;
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(4px);
+      background: rgba(8, 12, 18, 0.65);
       display: grid;
       place-items: center;
       padding: 16px;
@@ -606,32 +594,32 @@
     .dialog {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 14px;
       box-shadow: var(--shadow-lg);
-      padding: 26px;
-      max-width: 500px;
+      padding: 24px;
+      max-width: 480px;
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      max-height: calc(100vh - 40px);
+      gap: 14px;
+      max-height: calc(100vh - 32px);
       overflow-y: auto;
     }
-    .dialog h2 { margin: 0; font-size: 1.35rem; font-weight: 800; }
-    .dialog p { margin: 0; color: var(--muted); font-size: 0.95rem; }
-    .dgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .dialog h2 { margin: 0; font-size: 1.25rem; }
+    .dialog p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+    .dgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .dgrid .wide { grid-column: 1 / -1; }
     .drow { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
-    .err { color: var(--danger); font-weight: 700; font-size: 0.88rem; margin: 0; }
+    .err { color: var(--warn); font-weight: 600; font-size: 0.9rem; margin: 0; }
 
-    /* Login Screen Specifics */
+    /* Login Screen */
     .login-container {
-      max-width: 460px;
+      max-width: 440px;
       margin: 40px auto;
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 36px 30px;
+      border-radius: 16px;
+      padding: 32px 28px;
       box-shadow: var(--shadow-lg);
       display: flex;
       flex-direction: column;
@@ -642,19 +630,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     .login-icon {
-      width: 54px;
-      height: 54px;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #1d5bd8, #1240a0);
       color: #fff;
-      border-radius: 16px;
+      border-radius: 12px;
       display: grid;
       place-items: center;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       margin-bottom: 4px;
-      box-shadow: 0 6px 16px rgba(37,99,235,0.35);
+      box-shadow: 0 4px 14px rgba(29,91,216,0.3);
     }
     .user-select-grid {
       display: grid;
@@ -662,15 +650,15 @@
       gap: 10px;
     }
     .user-card-btn {
-      border: 2px solid var(--line);
+      border: 1px solid var(--line);
       background: var(--surface2);
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 12px 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      font-weight: 700;
+      font-weight: 600;
       transition: all 0.15s ease;
     }
     .user-card-btn:hover { border-color: var(--accent); }
@@ -682,40 +670,37 @@
     .user-card-btn .badge-pill {
       font-size: 0.72rem;
       background: var(--line);
-      padding: 1px 8px;
+      padding: 1px 7px;
       border-radius: 99px;
-      font-weight: 600;
+      font-family: var(--mono);
     }
 
     /* Toast */
     .toast {
       position: fixed;
-      top: 24px;
+      top: 14px;
       left: 50%;
       transform: translateX(-50%);
-      background: #0f172a;
-      color: #ffffff;
-      border-radius: 10px;
-      padding: 10px 22px;
-      font-size: 0.95rem;
-      font-weight: 600;
+      background: var(--fg);
+      color: var(--bg);
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 0.88rem;
       z-index: 100;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: opacity 0.2s;
     }
-    .toast.show { opacity: 1; transform: translate(-50%, 4px); }
+    .toast.show { opacity: 1; }
 
-    .empty { padding: 48px 20px; text-align: center; color: var(--muted); }
-    .empty b { display: block; color: var(--fg); font-size: 1.1rem; margin-bottom: 6px; }
+    .empty { padding: 44px 20px; text-align: center; color: var(--muted); }
+    .empty b { display: block; color: var(--fg); font-size: 1.05rem; margin-bottom: 4px; }
 
-    /* Responsive */
     @media (max-width: 900px) {
       .summary { grid-template-columns: 1fr; }
-      .sum-l { border-left: 0; border-bottom: 1px solid var(--line2); }
+      .sum-l { border-right: 0; border-bottom: 1px solid var(--line2); }
       .thead { display: none; }
-      .cols { grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; }
+      .cols { grid-template-columns: auto 34px minmax(0, 1fr); gap: 10px 12px; }
       .meta, .who, .state { grid-column: 2 / -1; }
     }
   </style>
@@ -724,37 +709,34 @@
 
 <div class="wrap" id="app">
 
-  <!-- LOGIN SCREEN (Shown if not logged in) -->
+  <!-- LOGIN SCREEN -->
   <div id="loginView" class="login-container" style="display:none;">
     <div class="login-header">
       <div class="login-icon">⚡</div>
-      <h2 style="margin:0; font-weight:800;">تسجيل الدخول للمنظومة</h2>
-      <p style="margin:0; color:var(--muted); font-size:0.95rem;">اختر حسابك وأدخل رقم الـ PIN للمتابعة</p>
+      <h2 style="margin:0; font-size:1.35rem; font-weight:700;">Sign in to Link Tracker</h2>
+      <p style="margin:0; color:var(--muted); font-size:0.9rem;">Select your coordinator account and enter your PIN</p>
     </div>
 
     <div>
-      <label style="display:block; font-weight:700; margin-bottom:8px;">اختر الكوردينيتور / الحساب:</label>
-      <div class="user-select-grid" id="userSelectList">
-        <!-- populated dynamically -->
-      </div>
+      <label style="display:block; font-weight:600; font-size:0.85rem; margin-bottom:8px;">Choose Coordinator / Account:</label>
+      <div class="user-select-grid" id="userSelectList"></div>
     </div>
 
     <div class="f">
-      <label for="loginPin">رقم الـ PIN السري:</label>
-      <input type="password" id="loginPin" inputmode="numeric" placeholder="أدخل رقم الـ PIN" maxlength="6" style="text-align:center; font-size:1.3rem; letter-spacing:0.3em; font-family:var(--mono);">
+      <label for="loginPin">Security PIN:</label>
+      <input type="password" id="loginPin" inputmode="numeric" placeholder="Enter PIN" maxlength="6" style="text-align:center; font-size:1.25rem; letter-spacing:0.25em; font-family:var(--mono);">
     </div>
 
     <p class="err" id="loginErr" style="display:none;"></p>
 
-    <button type="button" class="btn primary" id="loginSubmitBtn" style="justify-content:center; font-size:1.05rem;">
-      تسجيل الدخول 🚀
+    <button type="button" class="btn primary" id="loginSubmitBtn" style="justify-content:center; font-size:0.95rem;">
+      Sign In
     </button>
   </div>
 
-  <!-- MAIN APP (Shown when logged in) -->
+  <!-- MAIN APP VIEW -->
   <div id="mainView" style="display:none; display:flex; flex-direction:column; gap:20px;">
     
-    <!-- Top Header -->
     <header>
       <div class="brand">
         <div class="brand-icon">📶</div>
@@ -767,26 +749,26 @@
       <div class="header-actions">
         <div class="user-badge">
           <span id="userNameDisplay">--</span>
-          <span class="role-tag" id="userRoleDisplay">كوردينيتور</span>
+          <span class="role-tag" id="userRoleDisplay">Coordinator</span>
         </div>
-        <button class="btn primary" id="addBtn" type="button" style="display:none;">+ إضافة لينك</button>
-        <button class="btn" id="impBtn" type="button" style="display:none;">📥 استيراد شيت</button>
+        <button class="btn primary" id="addBtn" type="button" style="display:none;">+ Add Link</button>
+        <button class="btn" id="impBtn" type="button" style="display:none;">Import Sheet</button>
         <input type="file" id="impFile" accept=".xlsx,.xls,.csv" style="display:none;">
-        <button class="btn" id="usersManageBtn" type="button" style="display:none;">👥 الكوردينيتورز</button>
-        <button class="btn" id="exportBtn" type="button">📊 تحميل CSV</button>
-        <button class="btn danger small" id="logoutBtn" type="button">خروج</button>
+        <button class="btn" id="usersManageBtn" type="button" style="display:none;">Coordinators</button>
+        <button class="btn" id="exportBtn" type="button">Download CSV</button>
+        <button class="btn danger small" id="logoutBtn" type="button">Sign Out</button>
       </div>
     </header>
 
-    <!-- Coordinator Quick Focus Banner -->
+    <!-- Coordinator Focus Banner -->
     <div class="coord-banner" id="coordBanner" style="display:none;">
       <div>
-        <h3 id="coordGreeting">أهلاً يا مصطفى سمير! 👋</h3>
-        <p>تقدر تدوس هنا لعرض اللينكات الخاصة بيك وتعديل حالتها فوراً</p>
+        <h3 id="coordGreeting">Welcome back!</h3>
+        <p>You can quickly filter to only view and update the links assigned to you.</p>
       </div>
-      <div style="display:flex; gap:10px;">
-        <button class="btn" id="toggleMyLinksBtn" style="background:#fff; color:#1e3a8a; font-weight:700; border:0;">
-          🎯 عرض لينكاتي فقط
+      <div>
+        <button class="btn" id="toggleMyLinksBtn" style="background:#fff; color:#1d5bd8; font-weight:600; border:0;">
+          🎯 Show My Links Only
         </button>
       </div>
     </div>
@@ -794,45 +776,45 @@
     <!-- Summary Box -->
     <section class="summary" aria-label="Summary">
       <div class="sum-l">
-        <div class="pct"><b id="pct">0%</b><span id="pctSub">0 من 0 لينكات مكتملة</span></div>
+        <div class="pct"><b id="pct">0%</b><span id="pctSub">0 of 0 links done</span></div>
         <div class="bar" id="bar" role="img" aria-label="Share of links done"></div>
         <div class="legend" id="legend"></div>
       </div>
       <div class="sum-r">
-        <div class="label">توزيع اللينكات على الكوردينيتورز</div>
+        <div class="label">Coordinator Breakdown</div>
         <div class="chips" id="chips"></div>
       </div>
     </section>
 
-    <!-- Toolbar & Filters -->
+    <!-- Toolbar -->
     <div class="toolbar">
       <div class="tools">
         <div class="search">
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg>
-          <input type="search" id="q" placeholder="ابحث باسم السايت، الكود، الكوردينيتور..." aria-label="Search">
+          <input type="search" id="q" placeholder="Search site name, code or coordinator..." aria-label="Search">
         </div>
         <div class="seg" id="statusSeg" role="group"></div>
-        <select id="proj" aria-label="Project"><option value="all">كل المشاريع</option></select>
-        <select id="act" aria-label="Action type"><option value="all">كل أنواع الإجراءات</option></select>
+        <select id="proj" aria-label="Project"><option value="all">All Projects</option></select>
+        <select id="act" aria-label="Action type"><option value="all">All Action Types</option></select>
       </div>
       <div class="count-bar">
-        <span id="count">جاري التحميل...</span>
+        <span id="count">Loading links...</span>
         <span id="selTools"></span>
       </div>
     </div>
 
-    <!-- Table of Links -->
+    <!-- Links Table -->
     <div class="table">
       <div class="cols thead">
         <span></span>
         <span>#</span>
-        <span>اللينك (Site A ↔ Site B)</span>
-        <span>النوع والمشروع</span>
-        <span>الكوردينيتور</span>
-        <span>الحالة وملاحظات</span>
+        <span>Link (Site A ↔ Site B)</span>
+        <span>Type & Project</span>
+        <span>Coordinator</span>
+        <span>Status & Notes</span>
       </div>
       <div id="list">
-        <div class="empty"><b>جاري تحميل اللينكات...</b></div>
+        <div class="empty"><b>Loading links…</b></div>
       </div>
     </div>
 
@@ -842,87 +824,102 @@
 
 <!-- Bulk Selection Floating Bar -->
 <div class="bulk" id="bulk" style="display:none;">
-  <span>تم تحديد <b id="bulkN">0</b> لينك</span>
+  <span><b id="bulkN">0</b> selected</span>
   <select id="bulkCoordSelect" style="min-width:200px;">
-    <option value="">اختر الكوردينيتور للتعيين...</option>
+    <option value="">Assign coordinator...</option>
   </select>
-  <button class="btn primary" id="bulkGo" type="button">تعيين الكوردينيتور</button>
-  <button class="btn" id="bulkClear" type="button">إلغاء التحديد</button>
+  <button class="btn primary" id="bulkGo" type="button">Assign Coordinator</button>
+  <button class="btn" id="bulkClear" type="button">Clear Selection</button>
 </div>
 
 <!-- Modal: Add Link -->
 <div class="modal" id="addModal" style="display:none;">
-  <div class="dialog" style="max-width:580px;">
-    <h2>إضافة لينك جديد</h2>
+  <div class="dialog" style="max-width:540px;">
+    <h2>Add New Link</h2>
     <div class="dgrid">
-      <div class="f"><label>اسم Site A</label><input id="aSiteA" placeholder="مثال: Cairo Main" autocomplete="off"></div>
-      <div class="f"><label>كود Site A</label><input id="aCodeA" placeholder="مثال: CAI001" autocomplete="off"></div>
-      <div class="f"><label>اسم Site B</label><input id="aSiteB" placeholder="مثال: Giza Tower" autocomplete="off"></div>
-      <div class="f"><label>كود Site B</label><input id="aCodeB" placeholder="مثال: GIZ002" autocomplete="off"></div>
-      <div class="f"><label>المشروع (Project)</label><input id="aProject" placeholder="مثال: MW أو B2B" autocomplete="off"></div>
-      <div class="f"><label>نوع الإجراء (Action)</label><input id="aAction" placeholder="مثال: New Site, TX Boosting" autocomplete="off"></div>
+      <div class="f"><label>Site A Name</label><input id="aSiteA" placeholder="e.g. Cairo Main" autocomplete="off"></div>
+      <div class="f"><label>Site A Code</label><input id="aCodeA" placeholder="e.g. CAI001" autocomplete="off"></div>
+      <div class="f"><label>Site B Name</label><input id="aSiteB" placeholder="e.g. Giza Tower" autocomplete="off"></div>
+      <div class="f"><label>Site B Code</label><input id="aCodeB" placeholder="e.g. GIZ002" autocomplete="off"></div>
+      <div class="f"><label>Project</label><input id="aProject" placeholder="MW or B2B" autocomplete="off"></div>
+      <div class="f"><label>Action Type</label><input id="aAction" placeholder="e.g. New Site, TX Boosting" autocomplete="off"></div>
       <div class="f wide">
-        <label>تعيين كوردينيتور (اختياري)</label>
-        <select id="aCoord"><option value="">بدون كوردينيتور</option></select>
+        <label>Assign Coordinator (Optional)</label>
+        <select id="aCoord"><option value="">No coordinator</option></select>
       </div>
     </div>
     <p class="err" id="addErr" style="display:none;"></p>
     <div class="drow">
-      <button class="btn" id="addCancel" type="button">إلغاء</button>
-      <button class="btn primary" id="addGo" type="button">إضافة اللينك</button>
+      <button class="btn" id="addCancel" type="button">Cancel</button>
+      <button class="btn primary" id="addGo" type="button">Add Link</button>
     </div>
   </div>
 </div>
 
 <!-- Modal: Import Sheet -->
 <div class="modal" id="impModal" style="display:none;">
-  <div class="dialog" style="max-width:560px;">
-    <h2>استيراد شيت إكسيل / CSV</h2>
+  <div class="dialog" style="max-width:540px;">
+    <h2>Import Sheet (Excel / CSV)</h2>
     <div id="impBody"></div>
     <div class="drow">
-      <button class="btn" id="impCancel" type="button">إلغاء</button>
-      <button class="btn primary" id="impGo" type="button">تأكيد الإضافة</button>
+      <button class="btn" id="impCancel" type="button">Cancel</button>
+      <button class="btn primary" id="impGo" type="button">Add Links</button>
     </div>
   </div>
 </div>
 
 <!-- Modal: Manage Coordinators (Admin only) -->
 <div class="modal" id="usersModal" style="display:none;">
-  <div class="dialog" style="max-width:500px;">
-    <h2>إدارة الكوردينيتورز والحسابات</h2>
-    <p>الحسابات الحالية المسجلة في النظام:</p>
+  <div class="dialog" style="max-width:480px;">
+    <h2>Manage Coordinators</h2>
+    <p>Registered accounts in the system:</p>
     <div id="currentUsersList" style="display:flex; flex-direction:column; gap:8px;"></div>
     
     <hr style="border:0; border-top:1px solid var(--line); margin:8px 0;">
-    <h3 style="margin:0; font-size:1rem;">إضافة أو تعديل كوردينيتور</h3>
-    <div class="f"><label>الاسم بالكامل</label><input id="newCoordName" placeholder="مثال: حسام الدين"></div>
-    <div class="f"><label>رقم الـ PIN السري</label><input id="newCoordPin" placeholder="مثال: 4567" maxlength="6"></div>
+    <h3 style="margin:0; font-size:0.95rem;">Add / Edit Coordinator</h3>
+    <div class="f"><label>Full Name</label><input id="newCoordName" placeholder="e.g. Hossam El-Din"></div>
+    <div class="f"><label>Security PIN</label><input id="newCoordPin" placeholder="e.g. 4567" maxlength="6"></div>
     <div class="drow">
-      <button class="btn" id="usersModalClose" type="button">إغلاق</button>
-      <button class="btn primary" id="saveUserBtn" type="button">حفظ الكوردينيتور</button>
+      <button class="btn" id="usersModalClose" type="button">Close</button>
+      <button class="btn primary" id="saveUserBtn" type="button">Save Coordinator</button>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<!-- XLSX Library for Sheet Import -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <script>
 (function(){
+  // Clear any legacy Arabic session or user data
+  try {
+    var rawU = localStorage.getItem('smart_rfa_users');
+    if (rawU && /[\u0600-\u06FF]/.test(rawU)) {
+      localStorage.removeItem('smart_rfa_users');
+      localStorage.removeItem('smart_rfa_session');
+    }
+    var rawL = localStorage.getItem('smart_rfa_links');
+    if (rawL && /[\u0600-\u06FF]/.test(rawL)) {
+      rawL = rawL.replace(/مصطفى سمير/g, 'Mostafa Samir')
+                 .replace(/أبو زيد/g, 'Abu Zaid')
+                 .replace(/مراد/g, 'Mourad')
+                 .replace(/المدير \/ الأدمن/g, 'Admin');
+      localStorage.setItem('smart_rfa_links', rawL);
+    }
+  } catch(e){}
+
   var STATUS_LABELS = {
-    new: 'لم يتم التحديث',
-    open: 'جاري العمل (لم ينتهِ)',
-    done: 'تم الانتهاء (Done)'
+    new: 'Not updated',
+    open: 'Not finished',
+    done: 'Done'
   };
 
-  // Pre-configured users / coordinators
   var DEFAULT_USERS = [
-    { id: 'u1', username: 'mostafa', name: 'مصطفى سمير', role: 'coordinator', pin: '1234' },
-    { id: 'u2', username: 'abouzeid', name: 'أبو زيد', role: 'coordinator', pin: '2345' },
-    { id: 'u3', username: 'mourad', name: 'مراد', role: 'coordinator', pin: '3456' },
-    { id: 'u4', username: 'admin', name: 'المدير / الأدمن', role: 'admin', pin: '9999' }
+    { id: 'u1', username: 'mostafa', name: 'Mostafa Samir', role: 'coordinator', pin: '1234' },
+    { id: 'u2', username: 'abouzeid', name: 'Abu Zaid', role: 'coordinator', pin: '2345' },
+    { id: 'u3', username: 'mourad', name: 'Mourad', role: 'coordinator', pin: '3456' },
+    { id: 'u4', username: 'admin', name: 'Admin', role: 'admin', pin: '9999' }
   ];
 
   var users = DEFAULT_USERS;
@@ -931,7 +928,6 @@
   var links = [];
   var openId = null;
   var selectedIds = new Set();
-  var myLinksOnly = false;
   var filters = { q: '', status: 'all', project: 'all', action: 'all', coord: 'all' };
 
   var $ = function(s){ return document.querySelector(s); };
@@ -953,7 +949,7 @@
     t.textContent = msg;
     t.classList.add('show');
     clearTimeout(toastT);
-    toastT = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+    toastT = setTimeout(function(){ t.classList.remove('show'); }, 2000);
   }
 
   function initials(n){
@@ -966,25 +962,23 @@
     return h;
   }
   function avatar(n){
-    return n ? '<span class="av" style="background:hsl('+hue(n)+' 55% 40%)">'+esc(initials(n))+'</span>' : '<span class="av none">?</span>';
+    return n ? '<span class="av" style="background:hsl('+hue(n)+' 50% 38%)">'+esc(initials(n))+'</span>' : '<span class="av none">?</span>';
   }
 
-  // API Call Wrapper with fallback to LocalStorage
   async function api(path, opts){
     opts = opts || {};
     opts.headers = Object.assign({'Content-Type':'application/json'}, opts.headers || {});
     try {
       var res = await fetch(path, opts);
       if (res.ok) return await res.json();
-      var err = await res.json().catch(function(){ return {error:'خطأ في الاتصال بالسيرفر'}; });
+      var err = await res.json().catch(function(){ return {error:'Server communication error'}; });
       throw err;
     } catch(e){
-      console.warn('Backend API unavailable, using local mock data:', e);
+      console.warn('API fallback:', e);
       return mockLocalApi(path, opts);
     }
   }
 
-  // Local Mock Data Engine (ensures system works even if opened as a standalone static file)
   function mockLocalApi(path, opts){
     var method = (opts.method || 'GET').toUpperCase();
     var storedLinks = JSON.parse(localStorage.getItem('smart_rfa_links') || '[]');
@@ -995,7 +989,7 @@
       var b = JSON.parse(opts.body);
       var u = storedUsers.find(function(x){ return (x.username === b.username || x.name === b.username) && x.pin === b.pin; });
       if (u) return u;
-      throw { error: 'رمز الـ PIN غير صحيح' };
+      throw { error: 'Invalid PIN' };
     }
     if (path === '/api/links' && method === 'GET') return storedLinks;
     if (path === '/api/links' && method === 'POST'){
@@ -1027,7 +1021,7 @@
     }
     if (path === '/api/links/bulk-import' && method === 'POST'){
       var bImp = JSON.parse(opts.body);
-      bImp.items.forEach(function(item, idx){
+      bImp.items.forEach(function(item){
         var n = storedLinks.length + 1;
         storedLinks.push(Object.assign({
           id: 'L' + String(n).padStart(3, '0'),
@@ -1045,7 +1039,6 @@
     return {};
   }
 
-  // Setup Real-time Stream (Server-Sent Events)
   function setupSSE(){
     if (typeof EventSource === 'undefined') return;
     try {
@@ -1073,7 +1066,6 @@
     } catch(err){}
   }
 
-  // UI Flow & Authentication
   function initAuth(){
     var savedUser = localStorage.getItem('smart_rfa_session');
     if (savedUser){
@@ -1095,7 +1087,7 @@
   function renderUserSelectGrid(){
     var html = users.map(function(u){
       var isCoord = u.role === 'coordinator';
-      var tag = isCoord ? 'كوردينيتور' : 'مدير النظام';
+      var tag = isCoord ? 'Coordinator' : 'Admin';
       return '<button type="button" class="user-card-btn" data-username="'+esc(u.username)+'">' +
         avatar(u.name) +
         '<span>'+esc(u.name)+'</span>' +
@@ -1113,20 +1105,19 @@
       };
     });
 
-    // select first user by default
     var first = $('#userSelectList').querySelector('.user-card-btn');
     if (first) first.click();
   }
 
   $('#loginSubmitBtn').onclick = async function(){
     if (!selectedUserForLogin){
-      $('#loginErr').textContent = 'يرجى اختيار الكوردينيتور أولاً';
+      $('#loginErr').textContent = 'Please select your account';
       $('#loginErr').style.display = 'block';
       return;
     }
     var pin = $('#loginPin').value.trim();
     if (!pin){
-      $('#loginErr').textContent = 'يرجى كتابة رقم الـ PIN';
+      $('#loginErr').textContent = 'Please enter your PIN';
       $('#loginErr').style.display = 'block';
       return;
     }
@@ -1140,7 +1131,7 @@
       localStorage.setItem('smart_rfa_session', JSON.stringify(currentUser));
       onUserLoggedIn();
     } catch(err){
-      $('#loginErr').textContent = (err && err.error) || 'رقم الـ PIN غير صحيح';
+      $('#loginErr').textContent = (err && err.error) || 'Invalid PIN code';
       $('#loginErr').style.display = 'block';
     }
   };
@@ -1155,19 +1146,16 @@
     $('#loginView').style.display = 'none';
     $('#mainView').style.display = 'flex';
     $('#userNameDisplay').textContent = currentUser.name;
-    $('#userRoleDisplay').textContent = currentUser.role === 'admin' ? 'مدير النظام' : 'كوردينيتور';
+    $('#userRoleDisplay').textContent = currentUser.role === 'admin' ? 'Admin' : 'Coordinator';
 
-    // Role-specific buttons
     var isAdmin = currentUser.role === 'admin';
     $('#addBtn').style.display = isAdmin ? 'inline-flex' : 'none';
     $('#impBtn').style.display = isAdmin ? 'inline-flex' : 'none';
     $('#usersManageBtn').style.display = isAdmin ? 'inline-flex' : 'none';
 
-    // Coordinator banner
     if (!isAdmin){
       $('#coordBanner').style.display = 'flex';
-      $('#coordGreeting').textContent = 'أهلاً يا ' + currentUser.name + '! 👋';
-      // filter to coordinator's links by default
+      $('#coordGreeting').textContent = 'Welcome back, ' + currentUser.name + '! 👋';
       filters.coord = currentUser.name;
     } else {
       $('#coordBanner').style.display = 'none';
@@ -1188,11 +1176,11 @@
 
   function populateCoordinatorSelects(){
     var coords = users.filter(function(u){ return u.role === 'coordinator'; });
-    var opts = '<option value="">اختر الكوردينيتور...</option>' + coords.map(function(c){
+    var opts = '<option value="">Assign coordinator...</option>' + coords.map(function(c){
       return '<option value="'+esc(c.name)+'">'+esc(c.name)+'</option>';
     }).join('');
 
-    var addSel = $('#aCoord'); if (addSel) addSel.innerHTML = '<option value="">بدون كوردينيتور</option>' + coords.map(function(c){ return '<option value="'+esc(c.name)+'">'+esc(c.name)+'</option>'; }).join('');
+    var addSel = $('#aCoord'); if (addSel) addSel.innerHTML = '<option value="">No coordinator</option>' + coords.map(function(c){ return '<option value="'+esc(c.name)+'">'+esc(c.name)+'</option>'; }).join('');
     var bulkSel = $('#bulkCoordSelect'); if (bulkSel) bulkSel.innerHTML = opts;
   }
 
@@ -1201,7 +1189,7 @@
       links = await api('/api/links');
       render();
     } catch(e){
-      toast('تعذر جلب البيانات من السيرفر');
+      toast('Failed to load links from server');
     }
   }
 
@@ -1231,12 +1219,12 @@
 
     var pctVal = total ? Math.round(done / total * 100) : 0;
     $('#pct').textContent = pctVal + '%';
-    $('#pctSub').textContent = done + ' من أصل ' + total + ' لينكات تم إنجازها';
+    $('#pctSub').textContent = done + ' of ' + total + ' links done';
     $('#bar').innerHTML = '<i class="d" style="width:'+(total ? done/total*100 : 0)+'%"></i><i class="o" style="width:'+(total ? open/total*100 : 0)+'%"></i>';
     $('#legend').innerHTML =
-      '<span><i class="dot d"></i><b>'+done+'</b> تم (Done)</span>' +
-      '<span><i class="dot o"></i><b>'+open+'</b> جاري العمل</span>' +
-      '<span><i class="dot n"></i><b>'+nw+'</b> لم يتم التحديث</span>';
+      '<span><i class="dot d"></i><b>'+done+'</b> Done</span>' +
+      '<span><i class="dot o"></i><b>'+open+'</b> Not finished</span>' +
+      '<span><i class="dot n"></i><b>'+nw+'</b> Not updated</span>';
 
     var by = new Map(); var none = {t:0, d:0};
     links.forEach(function(d){
@@ -1245,12 +1233,12 @@
       var r = by.get(c) || {t:0, d:0}; r.t++; if (d.status === 'done') r.d++; by.set(c, r);
     });
 
-    var html = chip('all', 'الكل', total, null, true);
+    var html = chip('all', 'All', total, null, true);
     Array.from(by.keys()).sort().forEach(function(c){
       var r = by.get(c);
       html += chip(c, c, r.t, r.d);
     });
-    if (none.t) html += chip('__none', 'بدون كوردينيتور', none.t, none.d);
+    if (none.t) html += chip('__none', 'No coordinator', none.t, none.d);
     $('#chips').innerHTML = html;
   }
 
@@ -1260,7 +1248,7 @@
   }
 
   function renderSeg(){
-    var opts = [['all','الكل'],['new','لم يتم التحديث'],['open','جاري العمل'],['done','تم الانتهاء']];
+    var opts = [['all','All'],['new','Not updated'],['open','Not finished'],['done','Done']];
     $('#statusSeg').innerHTML = opts.map(function(o){
       return '<button type="button" data-status="'+o[0]+'" aria-pressed="'+(filters.status===o[0])+'">'+o[1]+'</button>';
     }).join('');
@@ -1268,56 +1256,56 @@
 
   function renderFiltersOptions(){
     var ps = Array.from(new Set(links.map(function(d){ return d.project; }).filter(Boolean))).sort();
-    $('#proj').innerHTML = '<option value="all">كل المشاريع</option>' + ps.map(function(p){ return '<option value="'+esc(p)+'">'+esc(p)+'</option>'; }).join('');
+    $('#proj').innerHTML = '<option value="all">All Projects</option>' + ps.map(function(p){ return '<option value="'+esc(p)+'">'+esc(p)+'</option>'; }).join('');
     $('#proj').value = filters.project;
 
     var as = Array.from(new Set(links.map(function(d){ return d.action; }).filter(Boolean))).sort();
-    $('#act').innerHTML = '<option value="all">كل أنواع الإجراءات</option>' + as.map(function(a){ return '<option value="'+esc(a)+'">'+esc(a)+'</option>'; }).join('');
+    $('#act').innerHTML = '<option value="all">All Action Types</option>' + as.map(function(a){ return '<option value="'+esc(a)+'">'+esc(a)+'</option>'; }).join('');
     $('#act').value = filters.action;
   }
 
   function editorHTML(id, d){
     var st = d.status || 'new';
     var f = function(name){ return 'f-'+id+'-'+name; };
-    var last = d.updatedAt ? '<p class="stamp">آخر تعديل '+(d.updatedByName ? 'بواسطة '+esc(d.updatedByName)+', ' : '')+new Date(d.updatedAt).toLocaleString('ar-EG')+'</p>' : '';
+    var last = d.updatedAt ? '<p class="stamp">Last edited '+(d.updatedByName ? 'by '+esc(d.updatedByName)+', ' : '')+new Date(d.updatedAt).toLocaleString()+'</p>' : '<p class="stamp">Not edited yet</p>';
     var isAdmin = currentUser && currentUser.role === 'admin';
 
     return '<div class="editor">' +
-      '<div class="panel"><h3>المسؤولية والتسليم</h3>' +
-        (isAdmin ? '<div class="f"><label for="'+f('coordinator')+'">كوردينيتور اللينك</label><input id="'+f('coordinator')+'" data-f="coordinator" data-id="'+id+'" value="'+esc(d.coordinator||'')+'" placeholder="اسم الكوردينيتور"></div>' : '') +
-        '<div class="f"><label for="'+f('withWhom')+'">اللينك مع مين دلوقتي؟ (اسم التيم أو الشخص)</label><input id="'+f('withWhom')+'" data-f="withWhom" data-id="'+id+'" value="'+esc(d.withWhom||'')+'" placeholder="مثال: تيم الفايبر، تيم التركيبات..."></div>' +
-        '<div class="f"><span class="lb">هل اللينك مع الكوردينيتور حالياً؟</span>' +
+      '<div class="panel"><h3>Ownership</h3>' +
+        (isAdmin ? '<div class="f"><label for="'+f('coordinator')+'">Site coordinator</label><input id="'+f('coordinator')+'" data-f="coordinator" data-id="'+id+'" value="'+esc(d.coordinator||'')+'" placeholder="Coordinator name"></div>' : '') +
+        '<div class="f"><label for="'+f('withWhom')+'">Who has this link now? (Team or Name)</label><input id="'+f('withWhom')+'" data-f="withWhom" data-id="'+id+'" value="'+esc(d.withWhom||'')+'" placeholder="e.g. Fiber Team, Installation..."></div>' +
+        '<div class="f"><span class="lb">Is it with the coordinator?</span>' +
           '<div class="seg" role="group">' +
-            '<button type="button" data-set="withMe" data-id="'+id+'" data-val="yes" aria-pressed="'+(d.withMe==='yes')+'">نعم (معايا)</button>' +
-            '<button type="button" data-set="withMe" data-id="'+id+'" data-val="no" aria-pressed="'+(d.withMe==='no')+'">لا (مش معايا)</button>' +
+            '<button type="button" data-set="withMe" data-id="'+id+'" data-val="yes" aria-pressed="'+(d.withMe==='yes')+'">Yes</button>' +
+            '<button type="button" data-set="withMe" data-id="'+id+'" data-val="no" aria-pressed="'+(d.withMe==='no')+'">No</button>' +
           '</div>' +
         '</div>' +
       '</div>' +
-      '<div class="panel"><h3>حالة الإنجاز والـ RFA</h3>' +
-        '<div class="f"><span class="lb">حالة اللينك</span>' +
+      '<div class="panel"><h3>Progress</h3>' +
+        '<div class="f"><span class="lb">Link Status</span>' +
           '<div class="seg" role="group">' +
-            '<button type="button" data-set="status" data-id="'+id+'" data-val="open" aria-pressed="'+(st==='open')+'">جاري العمل</button>' +
-            '<button type="button" data-set="status" data-id="'+id+'" data-val="done" aria-pressed="'+(st==='done')+'">تم الانتهاء (Done)</button>' +
+            '<button type="button" data-set="status" data-id="'+id+'" data-val="open" aria-pressed="'+(st==='open')+'">Not finished</button>' +
+            '<button type="button" data-set="status" data-id="'+id+'" data-val="done" aria-pressed="'+(st==='done')+'">Done</button>' +
           '</div>' +
         '</div>' +
         (st === 'done'
-          ? '<div class="f"><label for="'+f('sentDate')+'">تاريخ إرسال الـ RFA</label><input type="date" id="'+f('sentDate')+'" data-f="sentDate" data-id="'+id+'" value="'+esc(d.sentDate||'')+'" style="max-width:240px"><span class="hint">يتم ملؤه تلقائياً بتاريخ اليوم عند اختيار Done.</span></div>'
+          ? '<div class="f"><label for="'+f('sentDate')+'">Sent on (RFA)</label><input type="date" id="'+f('sentDate')+'" data-f="sentDate" data-id="'+id+'" value="'+esc(d.sentDate||'')+'" style="max-width:240px"><span class="hint">Filled with today when marked Done.</span></div>'
           : '') +
-        '<div class="f"><label for="'+f('stuckAt')+'">الملاحظات / معلق على إيه؟</label><textarea id="'+f('stuckAt')+'" data-f="stuckAt" data-id="'+id+'" placeholder="اكتب أي مشكلة أو تفاصيل معلقة...">'+esc(d.stuckAt||'')+'</textarea></div>' +
+        '<div class="f"><label for="'+f('stuckAt')+'">Stuck on / Notes</label><textarea id="'+f('stuckAt')+'" data-f="stuckAt" data-id="'+id+'" placeholder="What is it waiting on, or any notes?">'+esc(d.stuckAt||'')+'</textarea></div>' +
       '</div>' + last +
-      (isAdmin ? '<div class="f" style="grid-column:1/-1; align-items:flex-start;"><button type="button" class="btn danger small" data-del="'+id+'">حذف هذا اللينك</button></div>' : '') +
+      (isAdmin ? '<div class="f" style="grid-column:1/-1; align-items:flex-start;"><button type="button" class="btn danger small" data-del="'+id+'">Delete link</button></div>' : '') +
     '</div>';
   }
 
   function rowHTML(d){
     var id = d.id, st = d.status || 'new', open = openId === id;
-    var who = '<div class="t">' + (d.coordinator ? '<b>'+esc(d.coordinator)+'</b>' : '<span class="none">بدون كوردينيتور</span>');
-    if (d.withWhom) who += '<div class="sm">مع: '+esc(d.withWhom)+'</div>';
-    if (d.withMe === 'yes') who += '<div class="sm" style="color:var(--accent);">✓ مع الكوردينيتور</div>';
-    else if (d.withMe === 'no') who += '<div class="sm" style="color:var(--warn);">✗ ليس مع الكوردينيتور</div>';
+    var who = '<div class="t">' + (d.coordinator ? '<b>'+esc(d.coordinator)+'</b>' : '<span class="none">No coordinator</span>');
+    if (d.withWhom) who += '<div class="sm">With: '+esc(d.withWhom)+'</div>';
+    if (d.withMe === 'yes') who += '<div class="sm">Held by coordinator</div>';
+    else if (d.withMe === 'no') who += '<div class="sm">Not with coordinator</div>';
     who += '</div>';
 
-    var sub = st === 'done' ? [(d.sentDate ? 'أُرسل بتاريخ ' + d.sentDate : ''), d.stuckAt || ''].filter(Boolean).join(' · ') : (d.stuckAt || '');
+    var sub = st === 'done' ? [(d.sentDate ? 'Sent ' + d.sentDate : ''), d.stuckAt || ''].filter(Boolean).join(' · ') : (d.stuckAt || '');
 
     return '<article class="row st-'+st+(open?' open':'')+'" data-id="'+id+'">' +
       '<div class="cols sum" role="button" tabindex="0">' +
@@ -1342,22 +1330,21 @@
     var shown = links.filter(matches);
     var el = $('#list');
     if (!links.length){
-      el.innerHTML = '<div class="empty"><b>لا توجد لينكات مسجلة بعد</b>يمكن لمدير النظام إضافة لينكات جديدة أو استيراد شيت إكسيل.</div>';
+      el.innerHTML = '<div class="empty"><b>No links yet</b>Add links manually or import an Excel/CSV sheet.</div>';
     } else if (!shown.length){
-      el.innerHTML = '<div class="empty"><b>لا توجد نتائج تطابق البحث</b>جرب تغيير الفلاتر أو البحث.</div>';
+      el.innerHTML = '<div class="empty"><b>No links match these filters</b>Try changing search terms or filter chips.</div>';
     } else {
       el.innerHTML = shown.map(rowHTML).join('');
     }
 
-    $('#count').textContent = 'عرض ' + shown.length + ' من أصل ' + links.length + ' لينك';
-    $('#selTools').innerHTML = shown.length ? '<button class="btn small" type="button" id="selShown">تحديد كل المعروض ('+shown.length+')</button>' : '';
+    $('#count').textContent = 'Showing ' + shown.length + ' of ' + links.length + ' links';
+    $('#selTools').innerHTML = shown.length ? '<button class="btn small" type="button" id="selShown">Select all shown ('+shown.length+')</button>' : '';
 
     var n = selectedIds.size;
     $('#bulk').style.display = n ? 'flex' : 'none';
     $('#bulkN').textContent = n;
   }
 
-  // Save changes to backend
   async function saveLink(id, patch){
     patch.by = currentUser ? currentUser.id : null;
     patch.byName = currentUser ? currentUser.name : 'Unknown';
@@ -1369,14 +1356,13 @@
       });
       var idx = links.findIndex(function(l){ return l.id === id; });
       if (idx >= 0) links[idx] = Object.assign(links[idx], updated);
-      toast('تم الحفظ بنجاح ✓');
+      toast('Saved ✓');
       render();
     } catch(err){
-      toast('تعذر حفظ التعديل');
+      toast('Could not save link changes');
     }
   }
 
-  // Event Listeners for Table
   var list = $('#list');
   list.addEventListener('click', function(e){
     var t = e.target;
@@ -1405,7 +1391,7 @@
     if (del){
       if (del.dataset.armed !== '1'){
         del.dataset.armed = '1';
-        del.textContent = 'اضغط مرة أخرى للتأكيد على الحذف';
+        del.textContent = 'Click again to confirm delete';
         return;
       }
       deleteLink(del.dataset.del);
@@ -1441,14 +1427,13 @@
       links = links.filter(function(l){ return l.id !== id; });
       selectedIds.delete(id);
       openId = null;
-      toast('تم حذف اللينك');
+      toast('Link deleted');
       render();
     } catch(e){
-      toast('تعذر حذف اللينك');
+      toast('Could not delete link');
     }
   }
 
-  // Filter Chips and Status clicks
   $('#chips').addEventListener('click', function(e){
     var b = e.target.closest('button[data-coord]');
     if (!b) return;
@@ -1467,15 +1452,14 @@
     if (!currentUser) return;
     if (filters.coord === currentUser.name){
       filters.coord = 'all';
-      this.textContent = '🎯 عرض لينكاتي فقط';
+      this.textContent = '🎯 Show My Links Only';
     } else {
       filters.coord = currentUser.name;
-      this.textContent = '🌐 عرض كل اللينكات';
+      this.textContent = '🌐 Show All Links';
     }
     render();
   };
 
-  // Bulk Actions
   $('#selTools').addEventListener('click', function(e){
     if (e.target.id === 'selShown'){
       links.filter(matches).forEach(function(d){ selectedIds.add(d.id); });
@@ -1485,7 +1469,7 @@
   $('#bulkClear').onclick = function(){ selectedIds.clear(); render(); };
   $('#bulkGo').onclick = async function(){
     var name = $('#bulkCoordSelect').value;
-    if (!name){ toast('اختر اسم الكوردينيتور أولاً'); return; }
+    if (!name){ toast('Select a coordinator name'); return; }
     var ids = Array.from(selectedIds);
     try {
       await api('/api/links/bulk-assign', {
@@ -1497,14 +1481,13 @@
         if (item) item.coordinator = name;
       });
       selectedIds.clear();
-      toast('تم تعيين ' + name + ' لـ ' + ids.length + ' لينك بنجاح');
+      toast('Assigned ' + name + ' to ' + ids.length + ' links');
       render();
     } catch(e){
-      toast('حدث خطأ أثناء التعيين');
+      toast('Failed to bulk assign');
     }
   };
 
-  // Add Link Modal
   $('#addBtn').onclick = function(){
     ['aSiteA','aCodeA','aSiteB','aCodeB','aProject','aAction'].forEach(function(id){ $('#'+id).value = ''; });
     $('#aCoord').value = '';
@@ -1526,7 +1509,7 @@
       byName: currentUser.name
     };
     if (!r.siteA || !r.siteB){
-      $('#addErr').textContent = 'يرجى كتابة اسم الموقعين Site A و Site B';
+      $('#addErr').textContent = 'Please enter both Site A and Site B names.';
       $('#addErr').style.display = 'block';
       return;
     }
@@ -1534,15 +1517,14 @@
       var added = await api('/api/links', { method: 'POST', body: JSON.stringify(r) });
       links.push(added);
       $('#addModal').style.display = 'none';
-      toast('تمت إضافة اللينك بنجاح');
+      toast('Link added successfully');
       render();
     } catch(err){
-      $('#addErr').textContent = (err && err.error) || 'تعذر إضافة اللينك';
+      $('#addErr').textContent = (err && err.error) || 'Could not add link';
       $('#addErr').style.display = 'block';
     }
   };
 
-  // Excel / CSV Import
   var pendingImport = null;
   $('#impBtn').onclick = function(){ $('#impFile').click(); };
   $('#impCancel').onclick = function(){ $('#impModal').style.display = 'none'; pendingImport = null; };
@@ -1571,20 +1553,20 @@
       });
 
       if (!fresh.length){
-        toast('لم يتم العثور على بيانات صالحة في الشيت');
+        toast('No valid link rows found in file');
         return;
       }
 
       pendingImport = { items: fresh, file: f.name };
-      $('#impBody').innerHTML = '<p><b>' + esc(f.name) + '</b>: تم العثور على <b>' + fresh.length + '</b> لينك جاهز للإضافة.</p>' +
+      $('#impBody').innerHTML = '<p><b>' + esc(f.name) + '</b>: Found <b>' + fresh.length + '</b> link rows ready to import.</p>' +
         '<div style="max-height:160px; overflow:auto; border:1px solid var(--line); border-radius:8px; padding:8px;">' +
         fresh.slice(0, 5).map(function(item){
           return '<div style="font-size:0.85rem; margin-bottom:4px;">' + esc(item.siteA) + ' ↔ ' + esc(item.siteB) + ' (' + esc(item.project) + ')</div>';
-        }).join('') + (fresh.length > 5 ? '<div style="color:var(--muted); font-size:0.8rem;">وغيرها ' + (fresh.length - 5) + ' لينك إضافي...</div>' : '') +
+        }).join('') + (fresh.length > 5 ? '<div style="color:var(--muted); font-size:0.8rem;">and ' + (fresh.length - 5) + ' more...</div>' : '') +
         '</div>';
       $('#impModal').style.display = 'grid';
     } catch(err){
-      toast('تعذر قراءة ملف الشيت');
+      toast('Could not read that sheet file');
     }
   };
 
@@ -1598,15 +1580,14 @@
       });
       await loadLinks();
       $('#impModal').style.display = 'none';
-      toast('تم استيراد ' + pendingImport.items.length + ' لينك بنجاح');
+      toast('Imported ' + pendingImport.items.length + ' links');
       pendingImport = null;
     } catch(err){
-      toast('حدث خطأ أثناء الاستيراد');
+      toast('Failed to import links');
     }
     this.disabled = false;
   };
 
-  // CSV Export
   $('#exportBtn').onclick = function(){
     var head = ['#','Site A Name','Site A Code','Site B Name','Site B Code','Project','Action Type','Coordinator','Status','With Whom','With Coordinator','Stuck on / Notes','RFA Sent Date'];
     var rows = links.map(function(d){
@@ -1625,7 +1606,6 @@
     document.body.removeChild(link);
   };
 
-  // Manage Coordinators Modal
   $('#usersManageBtn').onclick = function(){
     renderUsersManager();
     $('#usersModal').style.display = 'grid';
@@ -1635,7 +1615,7 @@
   function renderUsersManager(){
     $('#currentUsersList').innerHTML = users.map(function(u){
       return '<div style="display:flex; justify-content:space-between; align-items:center; background:var(--surface2); padding:8px 12px; border-radius:8px; border:1px solid var(--line);">' +
-        '<div><b>' + esc(u.name) + '</b> <span style="font-size:0.8rem; color:var(--muted);">(' + (u.role === 'admin' ? 'مدير' : 'كوردينيتور') + ')</span></div>' +
+        '<div><b>' + esc(u.name) + '</b> <span style="font-size:0.8rem; color:var(--muted);">(' + (u.role === 'admin' ? 'Admin' : 'Coordinator') + ')</span></div>' +
         '<div style="font-family:var(--mono); font-size:0.85rem; color:var(--accent);">PIN: ' + esc(u.pin) + '</div>' +
       '</div>';
     }).join('');
@@ -1644,7 +1624,7 @@
   $('#saveUserBtn').onclick = async function(){
     var name = $('#newCoordName').value.trim();
     var pin = $('#newCoordPin').value.trim();
-    if (!name || !pin){ toast('اكتب الاسم ورقم الـ PIN'); return; }
+    if (!name || !pin){ toast('Enter coordinator name and PIN'); return; }
     try {
       await api('/api/users', {
         method: 'POST',
@@ -1654,13 +1634,12 @@
       renderUsersManager();
       $('#newCoordName').value = '';
       $('#newCoordPin').value = '';
-      toast('تم حفظ الكوردينيتور بنجاح');
+      toast('Coordinator saved');
     } catch(err){
-      toast('حدث خطأ في حفظ الكوردينيتور');
+      toast('Failed to save coordinator');
     }
   };
 
-  // Start
   initAuth();
 })();
 </script>
